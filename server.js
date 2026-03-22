@@ -35,10 +35,20 @@ app.post('/api/:type', (req, res) => {
         fs.writeFileSync(`./json/${type}.json`, JSON.stringify(newData, null, 2), 'utf8');
         
         if (type === 'release') {
-            const newReleased = newData.released && [
-                ...newData.released, 
-                ...Array(newData.queue.length - newData.released.length).fill(null)
-            ];
+            const newReleased = newData.released || []
+
+            if (newData.round !== 3) {
+                newData.released.concat(
+                    Array(newData.queue.length - newData.released.length).fill(null)
+                );
+            }
+
+
+            // const newReleased = newData.round === 3 ? newData.released :
+            // [
+            //     ...newData.released, 
+            //     ...Array(newData.queue.length - newData.released.length).fill(null)
+            // ];
 
             wss.clients.forEach(client => {
                 if (client.readyState === 1) {
@@ -58,50 +68,6 @@ app.post('/api/:type', (req, res) => {
           });
       }
 });
-
-// app.get('/api/settings', (req, res) => {
-//   const data = JSON.parse(fs.readFileSync(SETTINGS_FILE, 'utf8'));
-//   res.json(data);
-// });
-
-// app.post('/api/settings', (req, res) => {
-//   const newData = req.body;
-//   fs.writeFileSync(SETTINGS_FILE, JSON.stringify(newData, null, 2), 'utf8');  
-//   res.json({ status: 'ok' });
-// });
-
-// app.get('/api/data', (req, res) => {
-//   const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-//   res.json(data);
-// });
-
-// app.post('/api/data', (req, res) => {
-//   const newData = req.body;
-//   fs.writeFileSync(DATA_FILE, JSON.stringify(newData, null, 2), 'utf8');
-//   res.json({ status: 'ok' });
-// });
-
-// app.get('/api/release', (req, res) => {
-//   const data = JSON.parse(fs.readFileSync(RELEASE_FILE, 'utf8'));
-//   res.json(data);
-// });
-
-// app.post('/api/release', (req, res) => {
-//   const newData = req.body;
-//   fs.writeFileSync(RELEASE_FILE, JSON.stringify(newData, null, 2), 'utf8');
-  
-//   // Уведомляем всех WebSocket клиентов
-//   wss.clients.forEach(client => {
-//     if (client.readyState === 1) {
-//       client.send(JSON.stringify({ 
-//         type: 'data-updated', 
-//         data: newData 
-//       }));
-//     }
-//   });
-  
-//   res.json({ status: 'ok' });
-// });
 
 server.listen(3003, () => {
   console.log('Сервер запущен на порту 3003');

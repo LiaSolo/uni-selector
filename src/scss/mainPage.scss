@@ -8,7 +8,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(./assets/background.png);
+  background-image: url(./background.png);
   overflow: hidden;
 }
 
@@ -47,7 +47,7 @@ h1 {
 }
 
 .video {
-    background-image: url(./assets/Logo.png);
+    background-image: url(./Logo.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -59,7 +59,8 @@ h1 {
 
 .addedPoints {
     display: flex;
-    place-items: center;
+    align-items: center;
+    justify-content: center;
     
     width: 200px;
     height: 130px;

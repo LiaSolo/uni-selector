@@ -13,6 +13,43 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3001,
-    host: true
-  }
+    host: true,
+    allowedHosts: 'all',
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3003', 
+        changeOrigin: true,              
+        secure: false,
+        ws: true,                         
+      },
+      '/ws': {
+          target: 'ws://localhost:3003',
+          ws: true,
+          changeOrigin: true,
+        },
+    },
+  },
+  preview: {
+      host: true,
+      port: 4173,
+      allowedHosts: [
+        'localhost',
+        'pupupu.loca.lt',
+        '.loca.lt' 
+      ],
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3003',
+          changeOrigin: true,
+          secure: false,
+          ws: true,
+        },
+        '/ws': {
+          target: 'ws://localhost:3003',
+          ws: true,
+          changeOrigin: true,
+        },
+      }
+    }
+
 })

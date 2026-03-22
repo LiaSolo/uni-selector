@@ -16,18 +16,18 @@ export default function Faculty({facultyInfo, className, points, onDoubleClick})
         
         if (className === 'winnerReleased') {
             setGradient(true);
+
             setTimeout(() => {
                 setShowInfo(true);
-            }, 1000)
+            }, 1000);
+
             setTimeout(() => {
                 setGradient(false);
-            }, 2000)
+            }, 2000);
         }
-    }, [className, facultyInfo])
+    }, [className, facultyInfo]);
 
-    //useEffect(() => console.log(showInfo), [showInfo])
-    //console.log(points, className)
-    //console.log(facultyInfo.name)
+    // useEffect(() => console.log(showInfo, facultyInfo), [showInfo, facultyInfo]);
 
     return (
         <div className={cn("faculty", className)} onDoubleClick={onDoubleClick}>

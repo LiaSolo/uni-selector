@@ -27,20 +27,13 @@ export default function Release() {
     const [serverMessage, setServerMessage] = useState(''); 
     
     const releaseFormatter = useCallback((rawSettings) => {
-        rawSettings.round && setSelectedRound(rawSettings.round)
-        rawSettings.released && setReleased(rawSettings.released)
-        rawSettings.queue && setQueue(rawSettings.queue)
+        rawSettings.round && setSelectedRound(rawSettings.round);
+        rawSettings.released && setReleased(rawSettings.released);
+        rawSettings.queue && setQueue(rawSettings.queue);
     }, [])
 
-    // const setData = useCallback((rawSettings) => {
-    //     const data = settingsFormatter(rawSettings, selectedRound)
-
-    //     setQueue(data.queue);
-    //     saveData(data);
-    // }, [selectedRound])
-
     const setDataAndQueue = useCallback(async (rawSettings) => {
-        const {queue, ...data} = settingsFormatter(rawSettings, selectedRound)
+        const {queue, ...data} = settingsFormatter(rawSettings, selectedRound);
 
         setQueue(queue);
         setReleased([]);
@@ -54,15 +47,14 @@ export default function Release() {
             saveData(data),
         ));
 
-    }, [selectedRound])
+    }, [selectedRound]);
 
     useEffect(() => {
         setDisableNext(!selectedRound || released.length === queue.length)
     }, [released, queue, selectedRound]);
 
     useEffect(() => {
-        console.log(serverMessage)
-        setTimeout(() => {serverMessage && setServerMessage('')}, 5000)
++-        setTimeout(() => {serverMessage && setServerMessage('')}, 5000)
     }, [serverMessage]);
 
     const syncReleaseData = useCallback((data) => {
@@ -71,25 +63,7 @@ export default function Release() {
         }
 
         getSettings(setDataAndQueue);
-    }, [selectedRound, setDataAndQueue])
-
-    // const syncReleaseQueueAndData = useCallback((data) => {
-    //     if (data.round === selectedRound) {
-    //         setQueue(data.queue);
-
-    //         return;
-    //     }
-
-    //     // пересчитываем очередь
-    //     getSettings(setData); // пересчитываем участников
-
-    //     setReleased([]); // очищаем выпущенных
-    //     saveRelease({
-    //         released: [],
-    //         round: selectedRound,
-    //     });
-
-    // }, [selectedRound, setData])
+    }, [selectedRound, setDataAndQueue]);
 
     useEffect(() => {
         getRelease(releaseFormatter);
@@ -103,7 +77,7 @@ export default function Release() {
 
     const handleNext = async () => {
         if (released.length < queue.length) {
-            const newReleased = [...released, queue[released.length]]
+            const newReleased = [...released, queue[released.length]];
             setReleased(newReleased);
 
             setServerMessage(await summurizeServerResponse(
@@ -117,8 +91,8 @@ export default function Release() {
     }
 
     const handleResetLast = async () => {
-        const newReleased = [...released]
-        newReleased.pop()
+        const newReleased = [...released];
+        newReleased.pop();
         setReleased(newReleased);
 
         setServerMessage(await summurizeServerResponse(
@@ -139,7 +113,7 @@ export default function Release() {
                 queue: queue,
                 released: [],
                 round: selectedRound,
-            })
+            }),
         ));
     }
 
@@ -150,7 +124,7 @@ export default function Release() {
         }
 
         const filteredQueue = queue.filter(fac => fac !== clickedFac);
-        const newReleased = released.concat([clickedFac])
+        const newReleased = released.concat([clickedFac]);
         const newQueue = newReleased.concat(filteredQueue.slice(released.length));
         
         setQueue(newQueue);

@@ -1,5 +1,16 @@
-const API_URL = 'http://localhost:3003/api/'
+import useWebSocket from 'react-use-websocket';
 
+const API_URL = '/api/'
+const WS_URL = '/ws'
+
+export const useCustomWebSocket = () => {
+    const { lastJsonMessage } = useWebSocket(WS_URL, {
+        onOpen: () => console.log('Соединение установлено'),
+        shouldReconnect: () => true,
+    });
+
+    return lastJsonMessage;
+};
 
 async function get(path, setData) {
     await fetch(`${API_URL}${path}`)

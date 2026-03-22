@@ -2,9 +2,8 @@ import '../scss/mainPage.scss';
 import {allFacs} from "../config";
 import {motion} from 'framer-motion'
 import {useEffect, useState} from "react";;
-import useWebSocket from "react-use-websocket";
 import Faculty from '../components/Faculty';
-import { getData, getRelease } from '../services/api';
+import { getData, getRelease, useCustomWebSocket } from '../services/api';
 
 export default function Final() {
     const [finalists, setFinalists] = useState(null);
@@ -14,7 +13,7 @@ export default function Final() {
     const [pointsAnimation, setPointsAnimation] = useState('');
 
     useEffect(() => {
-        getData((data) => setFinalists(data.parts))
+        getData((data) => setFinalists(data.parts));
         getRelease((data) => setReleased(data.released));
     }, [])
 
@@ -32,28 +31,23 @@ export default function Final() {
         );
         
         newData.sort((a, b) => b[1] - a[1]);
-        setFinsOrdered(newData)
+        setFinsOrdered(newData);
     
-    }, [finalists, released])
+    }, [finalists, released]);
 
+    const lastJsonMessage = useCustomWebSocket();
 
-    const { lastJsonMessage } = useWebSocket('ws://localhost:3003', {
-        onOpen: () => console.log('Соединение установлено'),
-        shouldReconnect: () => true,
-    });
-
-    // Ловим следующего показанного финалиста
     useEffect(() => {
         if (lastJsonMessage && lastJsonMessage.type === 'data-updated') {
-            const newReleased = lastJsonMessage.data.released; 
+            const newReleased = lastJsonMessage.data; 
             setReleased(newReleased);
 
             if (!newReleased.length) {
-                setCurAddedPoints('')
+                setCurAddedPoints('');
                 return;
             }
 
-            const lastReleased = newReleased[newReleased.length - 1]
+            const lastReleased = newReleased[newReleased.length - 1];
             setCurAddedPoints(finalists[lastReleased].audience);
             setPointsAnimation('animatedPoints');
             setTimeout(() => setPointsAnimation(''), 1000);
