@@ -1,17 +1,17 @@
 {
   "parts": [
-    "studs",
-    "psych",
-    "vostok",
-    "soc",
-    "libarts",
-    "politfuck",
-    "chem",
-    "fmo",
-    "teo",
-    "hsm",
-    "inoz",
-    "hist"
+    "philolog",
+    "med",
+    "pmpu",
+    "bio",
+    "kio",
+    "econ",
+    "mm",
+    "arts",
+    "sport",
+    "media",
+    "mkn",
+    "philos"
   ],
-  "round": 1
+  "round": 2
 }

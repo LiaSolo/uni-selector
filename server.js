@@ -35,20 +35,20 @@ app.post('/api/:type', (req, res) => {
         fs.writeFileSync(`./json/${type}.json`, JSON.stringify(newData, null, 2), 'utf8');
         
         if (type === 'release') {
-            const newReleased = newData.released || []
+            //const newReleased = newData.released || []
 
-            if (newData.round !== 3) {
-                newData.released.concat(
-                    Array(newData.queue.length - newData.released.length).fill(null)
-                );
-            }
+            // if (newData.round !== 3) {
+            //     newData.released.concat(
+            //         Array(newData.queue.length - newData.released.length).fill(null)
+            //     );
+            // }
 
 
-            // const newReleased = newData.round === 3 ? newData.released :
-            // [
-            //     ...newData.released, 
-            //     ...Array(newData.queue.length - newData.released.length).fill(null)
-            // ];
+            const newReleased = newData.released &&
+            [
+                ...newData.released, 
+                ...Array(newData.queue.length - newData.released.length).fill(null)
+            ];
 
             wss.clients.forEach(client => {
                 if (client.readyState === 1) {

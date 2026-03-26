@@ -7,7 +7,7 @@ export const allFacs = {
         }
     },
     bio: {
-        name: "Biology Биология",
+        name: "Биология",
         logo: "bio.png",
         styles: {
             'background': 'linear-gradient(119deg, rgb(37, 144, 0) 0%, rgb(158, 255, 27) 100%)'

@@ -1,12 +1,14 @@
 {
   "queue": [
-    "hsm",
-    "studs",
-    "politfuck",
-    "fmo",
-    "soc",
-    "psych"
+    "philolog",
+    "med",
+    "mm",
+    "kio",
+    "arts",
+    "bio"
   ],
-  "released": [],
-  "round": 1
+  "released": [
+    "philolog"
+  ],
+  "round": 2
 }
