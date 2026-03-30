@@ -107,7 +107,7 @@
     },
     "bio": {
       "semi": 2,
-      "isFinal": true,
+      "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0

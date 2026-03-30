@@ -30,16 +30,20 @@ async function save(path, data) {
 
 
 
-export async function getSettings(setSettings) {
-    await get('settings', setSettings)
+export async function getSettings(setData) {
+    await get('settings', setData)
 }
 
-export async function getRelease(setRelease) {
-    await get('release', setRelease)
+export async function getRelease(setData) {
+    await get('release', setData)
 };
 
 export async function getData(setData) {
     await get('data', setData)
+};
+
+export async function getJudges(setData) {
+    await get('judges', setData)
 };
 
 
@@ -48,12 +52,16 @@ export async function saveData(newData) {
   return await save('data', newData)
 }
 
-export async function saveSettings(newSettings) {
-  return await save('settings', newSettings)
+export async function saveSettings(newData) {
+  return await save('settings', newData)
 }
 
-export async function saveRelease(newRelease) {
-  return await save('release', newRelease)
+export async function saveRelease(newData) {
+  return await save('release', newData)
+}
+
+export async function saveJudges(newData) {
+  return await save('judges', newData)
 }
 
 // export async function getSettings(settings, setSettings) {

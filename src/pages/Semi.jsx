@@ -33,7 +33,7 @@ export default function SemiFinal() {
     return (
             <div className="App">
                 <div className="right">
-                    <div className="video"/>
+                    <div className="logo"/>
                     <div className="FacultyList">
                         {
                             parts.map((fac) =>

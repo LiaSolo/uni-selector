@@ -8,7 +8,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(./background.png);
+  background-image: url(/assets/background.png);
   overflow: hidden;
 }
 
@@ -46,8 +46,45 @@ h1 {
     max-height: 620px;
 }
 
+.pointsLine {
+    font-size: 60px;
+    color: white;
+    display: flex;
+    gap: 16px;
+}
+
+.point {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    width: 80px;
+    height: 80px;
+    padding: 0 4px;
+    border-radius: 16px;
+
+    transition: opacity 1s;
+}
+
+.highScore {
+    background-color: orange;
+}
+
+.awarded {
+    opacity: 0.5;
+}
+
 .video {
-    background-image: url(/public/assets/Logo.png);
+    background-color: pink;
+
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.logo {
+    background-image: url(/assets/Logo.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

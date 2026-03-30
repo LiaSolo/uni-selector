@@ -85,7 +85,7 @@ export default function Final() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="video"/>
+                    <div className="logo"/>
                 </div>
             </div>
     )

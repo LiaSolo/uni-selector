@@ -1,14 +1,18 @@
 {
   "queue": [
-    "philolog",
-    "med",
     "mm",
+    "libarts",
     "kio",
+    "fmo",
+    "psych",
+    "med",
+    "philolog",
+    "vostok",
     "arts",
-    "bio"
+    "politfuck",
+    "teo",
+    "law"
   ],
-  "released": [
-    "philolog"
-  ],
-  "round": 2
+  "released": [],
+  "round": 3
 }

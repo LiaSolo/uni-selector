@@ -4,9 +4,11 @@ import {
     Route, BrowserRouter,
 } from "react-router-dom";
 import SemiFinal from "./pages/Semi";
-import Final from "./pages/Final";
+import FinalJudge from "./pages/FinalJudge";
+import FinalAudience from "./pages/FinalAudience";
 import Settings from "./pages/Settings";
 import Release from './pages/Release';
+import ScoreSettings from './pages/ScoreSettings';
 
 function App() {
     return (
@@ -14,8 +16,10 @@ function App() {
             <Routes>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/settings/release" element={<Release/>}/>
+                <Route path="/settings/judge" element={<ScoreSettings/>}/>
                 <Route path="/semi" element={<SemiFinal/>}/>
-                <Route path="/final" element={<Final/>}/>
+                <Route path="/final/audience" element={<FinalAudience/>}/>
+                <Route path="/final/judge" element={<FinalJudge/>}/>
             </Routes>
         </BrowserRouter>
     );

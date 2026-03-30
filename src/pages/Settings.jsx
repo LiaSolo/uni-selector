@@ -69,11 +69,6 @@ export default function Settings() {
         setFacSettings({...facSettings, [name]: newData})
     };
 
-    // const serverStatusHandler = (answers) => {
-    //     const isError = answers.some(ans => ans.status === 'error')
-    //     setServerMessage(isError ? 'error' : 'ok');
-    // }
-
     const handleSave = async() => {
         const resultSettings = {
             facs: facOrder.reduce((res, fac) => ({...res, [fac]: facSettings[fac]}), {}),
@@ -100,26 +95,11 @@ export default function Settings() {
         setFacOrder(Object.keys(initSettings))
         setIsHideCheckbox(false);
 
-        // saveSettings({});
-        // saveRelease({});
-        // saveData({});
-
-        //const status = 
-
         setServerMessage(await summurizeServerResponse(
             saveSettings({}),
             saveRelease({}),
             saveData({}),
         ));
-
-        // const answers = await Promise.all([
-        //     saveSettings({}),
-        //     saveRelease({}),
-        //     saveData({}),
-        // ]);
-
-        // const isError = answers.some(ans => ans.status === 'error')
-        // setServerMessage(isError ? 'error' : 'ok');
     }
 
     return (

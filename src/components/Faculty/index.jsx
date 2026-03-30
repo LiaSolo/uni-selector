@@ -4,7 +4,7 @@ import './styles.scss'
 
 
 // facultyInfo: logo, name, styles (config.js)
-export default function Faculty({facultyInfo, className, points, onDoubleClick}) {
+export default function Faculty({facultyInfo, className = '', points, onDoubleClick}) {
     const [gradient, setGradient] = useState(false);
     const [showInfo, setShowInfo] = useState(className !== 'winnerReleased');
     
@@ -27,7 +27,7 @@ export default function Faculty({facultyInfo, className, points, onDoubleClick})
         }
     }, [className, facultyInfo]);
 
-    // useEffect(() => console.log(showInfo, facultyInfo), [showInfo, facultyInfo]);
+    //useEffect(() => console.log(showInfo, facultyInfo), [showInfo, facultyInfo]);
 
     return (
         <div className={cn("faculty", className)} onDoubleClick={onDoubleClick}>
@@ -35,7 +35,11 @@ export default function Faculty({facultyInfo, className, points, onDoubleClick})
                 <>
                     <img src={`/assets/logos/${facultyInfo.logo}`}/>
                     {facultyInfo.name}
-                    <span className='points'>{points}</span>
+                    <span className='points'>
+                        <span style={{color: 'red'}}>{points}</span>
+                        <span>{points}</span>
+                    </span>
+                    
                 </>
             }
             {gradient && <div className="gradient"  style={facultyInfo.styles}/>}         
