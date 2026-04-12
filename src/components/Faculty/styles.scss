@@ -4,13 +4,12 @@
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
-    width: 268px;
     height: 50px;
     border-radius: 16px;
+    width: fit-content;
 
     font-size: $normal;
     line-height: 1;    
-    //color: black;
     color: rgb(79, 9, 136);
     
     transition: .5s linear all;    
@@ -21,14 +20,23 @@
     opacity: 0.5;
 }
 
+.facultyName {
+    width: 160px;
+}
+
+
 .winnersList .faculty,
 .FacultyPointList .faculty {
     //height: 66px;
-    height: 80px;
-    width: 560px;
-    font-family: 'Avenir-Bold';
+    //height: 80px;
+    //height: 2.5em;
+    //width: 340px;
+    //width: 200px;
+
+    font-family: 'Avenir-Demi';
     //font-size: $medium;
-    font-size: 32px;
+    //font-size: 32px;
+    font-size: 1.2em;
     color: rgb(79, 9, 136);
     background: rgb(242, 219, 255);
 }
@@ -44,19 +52,28 @@
 .released {
     background: rgba(227, 194, 247, 1);
     transition: all 1s;
-    transform: translateX(372px);
+    //transform: translateX(372px);
+    //transform: translateX(200%);
+    margin-left: auto;
+    //align-self: flex-end;
 }
 
 .points {
     display: grid;
-    grid-template-columns: 92px 92px;
+    grid-template-columns: 1.25em 2em;
     gap: 8px;
     margin-left: auto;
     margin-right: 8px;
 
     text-align: end;
-    font-family: 'Avenir-Bold';
-    font-size: 48px;
+    font-family: 'Avenir-Medium';
+    font-size: 1.75em;
+
+    opacity: 1;
+}
+
+.disappear {
+    animation: disappear 1s forwards;
 }
 
 img {
@@ -80,6 +97,15 @@ img {
         opacity: 1;
     }
     100% {
+        opacity: 0;
+    }
+}
+
+@keyframes disappear {
+    from {
+        opacity: 1;
+    }
+    to {
         opacity: 0;
     }
 }

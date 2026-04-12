@@ -1,5 +1,6 @@
 # settings.json
-Технический файлик для настройки
+
+Файлик с настройками, кто где участвует (надо удалить баллы)
 Example:
 ```json
 {
@@ -31,6 +32,70 @@ Example:
 ```
 `facs` --- все возможные факультеты (в том числе не участвующие), в порядке выступления на полуфиналах (сначала 1пф, потом 2пф)
 `lastWinner` --- победитель прошлого года, не участвует в полуфиналах, автоматически выходит в финал
+
+# score.json (judges.json)
+
+Файлик с баллами от жюри и ведущих для финала
+Example:
+```json
+{
+    "fins": [],
+    "facs": {
+        "facName1": {
+            "isVoited": true,
+            "points": {
+                "facName2": 0,
+                "facName3": 1,
+                "facName4": 2,
+                "facName5": 3,
+                "facName6": 4,
+                "facName7": 5,
+                "facName8": 6,
+                "facName9": 8,
+                "facName10": 10,
+                "facName11": 0,
+                "facName12": 0,
+            }
+        },
+        "facName2":  {
+            "isVoited": false,
+            "points": {}
+        },
+    },
+    "sumJudges": {
+        "facName2": 0,
+        "facName3": 1,
+        "facName4": 2,
+        "facName5": 3,
+        "facName6": 4,
+        "facName7": 5,
+        "facName8": 6,
+        "facName9": 8,
+        "facName10": 10,
+        "facName11": 0,
+        "facName12": 0,
+    },
+    "audience": {
+        "facName2": 0,
+        "facName3": 1,
+        "facName4": 2,
+        "facName5": 3,
+        "facName6": 4,
+        "facName7": 5,
+        "facName8": 6,
+        "facName9": 8,
+        "facName10": 10,
+        "facName11": 0,
+        "facName12": 0,
+    }
+}
+```
+`facs` --- все возможные факультеты (в том числе не голосовавшие), в порядке выступления глашатаев
+`audience` --- баллы зрителей
+
+
+
+
 
 # data.json
 Файл для нединамических данных (список участников). Не должен меняться в течение показа.
@@ -134,7 +199,6 @@ alt
 ```json
 {
     "parts": ["facName1", "facName2", "facName3"],
-    "finsCount": 6,
     "round": 1
 }
 ```
@@ -160,14 +224,31 @@ alt
 ## release.json
 ```json
 {
-    "queue": ["facName1", "facName2"], // не отправляется на клиент, очередь глашатаев
-    "released": {
-        "facName1" : {
+    "queue": [
+        {
+            "facName1" : {
+                "facName2": 0,
+                "facName3": 10,
+            }
+        }, {
+            "facName5" : {
+                "facName2": 0,
+                "facName3": 10,
+            }
+        }, {
+            "name": "facName5",
             "facName2": 0,
             "facName3": 10,
         }
-    }, // на клиент через сокет отправляется только last, 
-       // при инициализации клиента вытягивается весь released и обновляется порядок
+    ], // не отправляется на клиент, очередь глашатаев
+    "released": [
+        {
+            "facName1" : {
+                "facName2": 0,
+                "facName3": 10,
+            }
+        } // на клиент через сокет отправляется только last, 
+    ],  // при инициализации клиента вытягивается весь released и обновляется порядок
     // если в released хранить только названия, 
     // то как при перезагрузке странички клиент узнает все баллы??
 
@@ -180,8 +261,18 @@ alt
 ```json
 {
     "parts": {
-        "facName1": 10,
-        "facName2": 6
+        "facName1": 100,
+        "facName2": 60,
+
+
+        // {
+        //     "name": "facName1",
+        //     "points" : 100
+        // },
+        // {
+        //     "name": "facName2",
+        //     "points" : 60
+        // },
     }, // участники-финалисты в порядке убывания баллов жюри
     "round": 4
 }
@@ -189,14 +280,47 @@ alt
 ## release.json
 ```json
 {
-    "queue": ["facName1", "facName2"], // не отправляется на клиент, объявления баллов зрителей, 
+    "queue": [
+        // {"facName1": 50},
+        // {"facName2": 35},
+4
+        {
+            "facName1": {
+                "curAdded": 50,
+                "total": 150,
+            }
+        },
+        {
+            "facName2": {
+                "curAdded": 35,
+                "total": 95,
+            }
+        },
+
+
+        // {
+        //     "name": "facName1",
+        //     "points" : 50
+        // },
+        // {
+        //     "name": "facName2",
+        //     "points" : 35
+        // },
+    ], // не отправляется на клиент, объявления баллов зрителей, 
                                        // в порядке возрастания баллов жюри
-    "released": {
-        "facName1" : {
-            "facName2": 0,
-            "facName3": 10,
-        }
-    }, // на клиент через сокет отправляется только last, 
+    "released": [
+        {
+            "facName1": {
+                "curAdded": 50,
+                "total": 150,
+            }
+        },
+
+        //     {
+        //     "name": "facName1",
+        //     "points" : 50
+        // },
+    ], // на клиент через сокет отправляется только last, 
        // при инициализации клиента вытягивается весь released и обновляется порядок
     // если в released хранить только названия, 
     // то как при перезагрузке странички клиент узнает все баллы??
@@ -206,18 +330,86 @@ alt
 ```
 
 
-# judge.json
+alt alt
+# final (judge)
 
+## release.json
 ```json
 {
-    //"fins": ["facName1", "facName2", "facName3"],
-    "facName1" : {
-        "facName2": 0,
-        "facName3": 10,
-    },
-    "facName5" : {
-        "facName1": 0,
-        "facName3": 10,
-    }
+    "queue": [
+        {
+            "name": "facName1",
+            "points": {
+                "facName2": 2,
+                "facName3": 1,
+                "facName4": 0,
+                "facName5": 0,
+            },
+        },
+        {
+            "name": "facName1",
+            "points": {
+                "facName4": 10,
+            }
+        }
+    ], // не отправляется на клиент, в порядке объявления баллов 
+    // (только при инициализации для кол-ва глашатаев)
+                                       
+    "released": [
+            {
+            "name": "facName1",
+            "points": {
+                "facName2": {
+                    "curAdded": 2,
+                    "total": 2,
+                },
+                "facName3": {
+                    "curAdded": 1,
+                    "total": 1,
+                },
+                "facName4": {
+                    "curAdded": 0,
+                    "total": 0,
+                },
+                "facName5": {
+                    "curAdded": 0,
+                    "total": 0,
+                },
+            },
+        },
+        {
+            "name": "facName1",
+            "points": {
+                "facName2": {
+                    "curAdded": 2,
+                    "total": 2,
+                },
+                "facName3": {
+                    "curAdded": 1,
+                    "total": 1,
+                },
+                "facName4": {
+                    "curAdded": 10,
+                    "total": 10,
+                },
+                "facName5": {
+                    "curAdded": 0,
+                    "total": 0,
+                },
+            },
+        }
+    ],
+       // при инициализации клиента вытягивается весь released и обновляется порядок
+    // если в released хранить только названия, 
+    // то как при перезагрузке странички клиент узнает все баллы??
+    
+    // после получения клиентом released в finsOrder записывается второе число в массиве баллов -- текущая сумма баллов факультета
+    // при получении пустого released (нач состояние или сбросили всех) 
+    // finsOrder формируется из финалистов + нули
+    // как вернуть последнего?
+    // сервер пришлет released без последнего, finsOrder просто установит все значения последнего
+
+    "round": 4
 }
 ```
+

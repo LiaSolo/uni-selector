@@ -75,6 +75,7 @@ export default function Settings() {
             lastWinner: lastWinner,
         };
 
+        // TODO: формировать data и release ТОЛЬКО на этапе релиза
         const {queue, ...data} = settingsFormatter(resultSettings, selectedRound);
 
         setServerMessage(await summurizeServerResponse(
@@ -100,6 +101,12 @@ export default function Settings() {
             saveRelease({}),
             saveData({}),
         ));
+    }
+
+    const updateLastWinner = (fac) => {
+        setLastWinner(fac);
+        facSettings[fac].isFinal = true;
+        
     }
 
     return (
@@ -154,7 +161,7 @@ export default function Settings() {
                             key={key} 
                             name={allFacs[key].name} 
                             isLastWinner={lastWinner === key}
-                            setLastWinner={() => setLastWinner(key)}
+                            setLastWinner={() => updateLastWinner(key)}
                             showOption={selectedRound}
                             serverData={facSettings[key]}
                             serverUpdate={(newData) => updateOneFacOneSetting(key, newData)} 

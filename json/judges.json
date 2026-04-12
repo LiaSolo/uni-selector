@@ -1,529 +1,573 @@
 {
-  "gimn": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
+  "fins": [
+    "vostok",
+    "arts",
+    "mm",
+    "med",
+    "politfuck",
+    "psych",
+    "libarts",
+    "teo",
+    "philolog",
+    "philos",
+    "fmo",
+    "law"
+  ],
+  "facs": {
+    "gimn": {
+      "isVoited": true,
+      "points": {
+        "vostok": 1,
+        "arts": 2,
+        "mm": 3,
+        "med": 4,
+        "politfuck": 5,
+        "psych": 6,
+        "libarts": 8,
+        "teo": 10,
+        "philolog": 1,
+        "philos": 2,
+        "fmo": 3,
+        "law": 4
+      }
+    },
+    "bio": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 2,
+        "mm": 3,
+        "med": 4,
+        "politfuck": 5,
+        "psych": 6,
+        "libarts": 8,
+        "teo": 1,
+        "philolog": 10,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "vostok": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 5,
+        "mm": 6,
+        "med": 8,
+        "politfuck": 10,
+        "psych": 4,
+        "libarts": 3,
+        "teo": 2,
+        "philolog": 1,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "media": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "hsm": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "inoz": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "inyaz": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "irkiar": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "hist": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "arts": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "kio": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "college": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "mm": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "med": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "mkn": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "pmpu": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "politfuck": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "psych": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "libarts": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "soc": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "stomat": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "studs": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "teo": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "sport": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "phys": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "philolog": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "philos": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "fmo": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "chem": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "econ": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
+    },
+    "law": {
+      "isVoited": true,
+      "points": {
+        "vostok": 0,
+        "arts": 0,
+        "mm": 0,
+        "med": 0,
+        "politfuck": 0,
+        "psych": 0,
+        "libarts": 0,
+        "teo": 0,
+        "philolog": 0,
+        "philos": 0,
+        "fmo": 0,
+        "law": 0
+      }
     }
   },
-  "bio": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
+  "sumJudges": {
+    "vostok": 1,
+    "arts": 9,
+    "mm": 12,
+    "med": 16,
+    "politfuck": 20,
+    "psych": 16,
+    "libarts": 19,
+    "teo": 13,
+    "philolog": 12,
+    "philos": 2,
+    "fmo": 3,
+    "law": 4
   },
-  "vostok": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "media": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "hsm": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "inoz": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "inyaz": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "irkiar": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "hist": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "arts": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "kio": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 10,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "college": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "mm": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "med": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "mkn": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "pmpu": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "politfuck": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "psych": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "libarts": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "soc": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "stomat": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "studs": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "teo": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "sport": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "phys": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "philolog": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "philos": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "fmo": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "chem": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "econ": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
-  },
-  "law": {
-    "isVoited": true,
-    "points": {
-      "law": 0,
-      "vostok": 0,
-      "arts": 0,
-      "kio": 0,
-      "mm": 0,
-      "med": 0,
-      "politfuck": 0,
-      "psych": 0,
-      "libarts": 0,
-      "teo": 0,
-      "philolog": 0,
-      "fmo": 0
-    }
+  "audience": {
+    "vostok": 1,
+    "arts": 20,
+    "mm": 15,
+    "med": 0,
+    "politfuck": 0,
+    "psych": 0,
+    "libarts": 0,
+    "teo": 0,
+    "philolog": 0,
+    "philos": 0,
+    "fmo": 0,
+    "law": 0
   }
 }

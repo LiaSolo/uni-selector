@@ -1,20 +1,28 @@
-import {useEffect, useState} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
+import {motion} from 'framer-motion'
 import cn from 'classnames';
 import './styles.scss'
 
 
-// facultyInfo: logo, name, styles (config.js)
-export default function Faculty({facultyInfo, className = '', points, onDoubleClick}) {
+// facultyInfo: logo, name, styles, color (config.js)
+export default function Faculty({
+    facultyInfo, 
+    className = '', 
+    curPoints = '', 
+    allPoints = '', 
+    onDoubleClick
+}) {
     const [gradient, setGradient] = useState(false);
+    const [prevPoints, setPrevPoints] = useState({cur: '', total: ''});
     const [showInfo, setShowInfo] = useState(className !== 'winnerReleased');
     
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!facultyInfo) {
             setShowInfo(false);
             return;
         }
         
-        if (className === 'winnerReleased') {
+        if (className === 'winnerReleased' || curPoints) {
             setGradient(true);
 
             setTimeout(() => {
@@ -25,24 +33,40 @@ export default function Faculty({facultyInfo, className = '', points, onDoubleCl
                 setGradient(false);
             }, 2000);
         }
-    }, [className, facultyInfo]);
+    }, [className, facultyInfo, curPoints]);
+
+    useLayoutEffect(() => {
+        setTimeout(() => {
+            setPrevPoints({
+                cur: curPoints,
+                total: allPoints,
+            });
+        }, 1000);
+
+    }, [curPoints, allPoints])
 
     //useEffect(() => console.log(showInfo, facultyInfo), [showInfo, facultyInfo]);
-
     return (
-        <div className={cn("faculty", className)} onDoubleClick={onDoubleClick}>
+        <motion.div 
+            layout 
+            transition={{ duration: 1 }}
+            className={cn("faculty", className)} 
+            onDoubleClick={onDoubleClick}
+        >
             {showInfo && facultyInfo && 
                 <>
                     <img src={`/assets/logos/${facultyInfo.logo}`}/>
-                    {facultyInfo.name}
-                    <span className='points'>
-                        <span style={{color: 'red'}}>{points}</span>
-                        <span>{points}</span>
-                    </span>
+                    <span className="facultyName">{facultyInfo.name}</span>
+                    {(allPoints !== '') && 
+                        <span className='points'>
+                            <span className={!curPoints ? 'disappear': ''} style={{color: facultyInfo.color}}>{prevPoints.cur}</span>
+                            <span>{prevPoints.total}</span>
+                        </span>
+                    }
                     
                 </>
             }
             {gradient && <div className="gradient"  style={facultyInfo.styles}/>}         
-        </div>
+        </motion.div>
     );
 }

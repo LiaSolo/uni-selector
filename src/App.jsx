@@ -16,7 +16,7 @@ function App() {
             <Routes>
                 <Route path="/settings" element={<Settings/>}/>
                 <Route path="/settings/release" element={<Release/>}/>
-                <Route path="/settings/judge" element={<ScoreSettings/>}/>
+                <Route path="/settings/score" element={<ScoreSettings/>}/>
                 <Route path="/semi" element={<SemiFinal/>}/>
                 <Route path="/final/audience" element={<FinalAudience/>}/>
                 <Route path="/final/judge" element={<FinalJudge/>}/>

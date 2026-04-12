@@ -1,12 +1,9 @@
 import '../scss/settingsPage.scss';
-import FacultySettings from '../components/FacultySettings'
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState, useRef } from 'react';
 import Sortable from 'sortablejs';
 import { Link } from 'react-router-dom';
-import RadioButton from '../components/radioButton';
 import { allFacs } from '../config';
-import { getData, getJudges, getSettings, saveData, saveJudges, saveRelease, saveSettings } from '../services/api';
-import { settingsFormatter } from '../services/settingsFormatter';
+import { getJudges, getSettings, saveJudges } from '../services/api';
 import Button from '../components/Button';
 import cn from 'classnames';
 import summurizeServerResponse from '../services/summurizeServerResponse';
@@ -20,48 +17,52 @@ Object.keys(allFacs).forEach((fac) =>
     }
 );
 
+ const getZeroPoints = (keys) => {
+    keys.reduce((res, key) => ({
+        ...res,
+        [key]: 0,
+    }), {});
+}
+
+
 export default function ScoreSettings() {  
     const [serverMessage, setServerMessage] = useState('');
+    const [activeColumn, setActiveColumn] = useState('');
     const [isHideCheckbox, setIsHideCheckbox] = useState(false);
-    const [facOrder, setFacOrder] = useState(Object.keys(allFacs)); 
-
+    const [isEnoughData, setIsEnoughData] = useState(false);
+     
     const [fins, setFins] = useState([]);
+    const [audience, setAudience] = useState({});
+    //const [sumJudges, setSumJudges] = useState({});
     const [judges, setJudges] = useState(initSettings);
+    const [facOrder, setFacOrder] = useState(Object.keys(allFacs));
 
-    const containerRef = useRef(null);
+    const rowsRef = useRef(null);
+    const columnsRef = useRef(null);
+
 
     useEffect(() => {
-        getJudges((data) => {
-            //console.log('judge', data)
-            if (!Object.keys(data).length) {
-                return;
-            }
-
-            setJudges(prev => ({...prev, ...data})); // если уже есть настройки
-        }); 
-
         // выявляем финалистов
         getSettings((rawSettings) => {
-            //console.log(222, rawSettings.facs)
             if (!rawSettings.facs) {
                 return;
             }
 
-            setFins(
-                // прошлогодний победитель + финалисты пф
-                [
-                    rawSettings.lastWinner,
-                    ...Object.keys(allFacs).filter(fac => rawSettings.facs[fac].isFinal),
-                ]
-            );
-            setFacOrder(Object.keys({...rawSettings.facs, ...allFacs}))
+            // прошлогодний победитель + финалисты пф
+            
+            // const finalists = [
+            //     rawSettings.lastWinner,
+            //     ...Object.keys(allFacs).filter(fac => rawSettings.facs[fac].isFinal),
+            // ]
+
+            //console.log(rawSettings[rawSettings.lastWinner])
+
+            const finalists = Object.keys(allFacs).filter(fac => rawSettings.facs[fac].isFinal);
+
+            setFins(finalists);
         });
  
     }, []);
-
-    useEffect(() => {
-        console.log(judges)
-    }, [judges])
 
     useEffect(() => {
         //console.log(111, fins)
@@ -69,79 +70,117 @@ export default function ScoreSettings() {
             return;
         }
 
-        //console.log(fins, judges)
-        // const newJudges = {...judges}
-        // //console.log(newJudges)
-        // Object.keys(newJudges).forEach(fac => {
-        //     fins.forEach((fin) => {
-        //         newJudges[fac].points[fin] ||= 0
-        //     });
-        // });
-        // setJudges(newJudges);
+        
 
-        setJudges(prev => {
-            const newJudges = {...prev}
-            //console.log(newJudges)
-            Object.keys(newJudges).forEach(fac => {
+        getJudges((data) => {
+            // if (!data.fins) {
+            //     getSettings()
+            // }
+
+            // вынести как глобальную функцию с аргументом array
+            const zeroPoints = fins.reduce((res, fin) => ({
+                ...res,
+                [fin]: 0,
+            }), {});
+
+            //const zeroPoints = getZeroPoints(data.fins);
+
+            setAudience({...zeroPoints, ...(data.audience ?? {})});
+
+            const facs = data.facs ?? {...initSettings};
+
+            //const newSettings = {...initSettings};
+
+            Object.keys(initSettings).forEach(fac => {
                 //console.log(fac, newJudges[fac])
-                fins.forEach((fin) => {
-                    newJudges[fac].points[fin] ||= 0
-                });
+
+                facs[fac] ??= {} // если вообще нет fac in facs
+                facs[fac].isVoited ??= true; // если нет isVoited in fac
+                facs[fac].points = {...zeroPoints, ...(facs[fac].points ?? {})} // если нет points in fac или не в полном виде
+
+                // if (fac in facs) {
+                //     facs[fac].isVoited ??= true;
+                //     facs[fac].points = {...zeroPoints, ...facs[fac].points}
+                // } else {
+                //     facs[fac] = {isVoited: true, points: zeroPoints}
+                // }
+                
+                // fins.forEach((fin) => {
+                //     newSettings[fac].points[fin] = data[fac] && data[fac].points && data[fac].points[fin] || 0;
+                // });
             });
 
-            return newJudges;
-        })
+            console.log('new judjes', facs)
+            setJudges(facs);
+            setFacOrder(Object.keys(facs));
+            setIsEnoughData(true);
+        }); 
 
-        //setJudges(prev => Object.keys(prev).forEach(fac => prev[fac].points))
     }, [fins]);
 
-    // устанавливаем порядок выступления глашатаев перетаскиванием
-    useEffect(() => {
-        if (!containerRef.current) return;
+    // устанавливаем порядок выступления глашатаев перетаскиванием строк
+    useLayoutEffect(() => {
+        if (!rowsRef.current) return;
 
-        const sortable = new Sortable(containerRef.current, {
+        new Sortable(rowsRef.current, {
             animation: 150,
             
             onEnd: () => {
-                const items = containerRef.current.querySelectorAll('.row');
+                const items = rowsRef.current.querySelectorAll('tbody > tr');
                 const newOrder = Array.from(items).map(item => item.dataset.id);
                 setFacOrder(newOrder);        
             },
         });
 
-        return () => sortable.destroy();
+        // if (!columnsRef.current) return;
+
+        // new Sortable(columnsRef.current, {
+        //     animation: 150,
+            
+        //     onEnd: () => {
+        //         const items = columnsRef.current.querySelectorAll('th.rotatedHeader');
+        //         const newOrder = Array.from(items).map(item => item.dataset.id);
+        //         setFins(newOrder);   
+        //         //console.log(newOrder)     
+        //     },
+        // });
+
+        //return () => sortable.destroy();
     }, []);    
 
-    // useEffect(() => {
-    //     console.log(serverMessage)
-    //     setTimeout(() => {serverMessage && setServerMessage('')}, 5000)
-    // }, [serverMessage]);
+    useLayoutEffect(() => {
+        //console.log(serverMessage)
+        setTimeout(() => {serverMessage && setServerMessage('')}, 5000);
+    }, [serverMessage]);
 
-
-    // const updateOneFacOneSetting = (name, setting) => {
-    //     // setting: {key: value}
-    //     //const newData = {...facSettings[name], ...setting}
-    //     console.log(name, setting)
-    //     setJudges( prev => ({
-    //         ...prev, 
-    //         [name]: {...prev[name], ...setting},
-    //     }));
-    // };
+    const updateAudienceScore = (fac, newPoints) => {
+        setAudience(prev => ({
+            ...prev,
+            [fac]: newPoints,
+        }))
+    }
 
     const updateOneFacIsVoited = (name, newIsVoited) => {
-        //console.log(name, setting)
-        setJudges( prev => ({
+        //console.log(name, newIsVoited)
+        setJudges(prev => ({
             ...prev, 
             [name]: {
-                isVoited: newIsVoited,
-                points: prev[name].points
+                ...prev[name],
+                ...newIsVoited,
             },
         }));
     };
 
     const updateOneFacOnePoint = (name, setting) => {
-        // setting: {fac: points}
-        console.log(name, setting)
+        // setting: {fin: points}
+        // const fin = Object.keys(setting)[0]
+        // const diffSum = setting[fin] - judges[name].points[fin]
+
+        // setSumJudges(prev => ({
+        //     ...prev,  
+        //     [fin]: prev[fin] + diffSum
+        // }));
+
         setJudges( prev => ({
             ...prev, 
             [name]: {
@@ -154,57 +193,52 @@ export default function ScoreSettings() {
         }));
     };
 
+    const judgeSumByFac = (fac) => {
+        let sumPoints = 0;
+        
+
+        isEnoughData && Object.keys(judges).forEach((herald) => {
+            sumPoints += judges[herald].points[fac]
+        });
+
+        return sumPoints;
+    }
+
+    const allPointsByFac = (fac) => {
+        return judgeSumByFac(fac) + (audience[fac] ?? 0)
+    }
+
+
+
     const handleSave = async() => {
-        // const resultSettings = {
-        //     facs: facOrder.reduce((res, fac) => ({...res, [fac]: facSettings[fac]}), {}),
-        //     lastWinner: lastWinner,
-        // };
+        
+        const resultJudges = {
+            fins: fins,
+            facs: facOrder.reduce((res, fac) => ({...res, [fac]: judges[fac]}), {}),
+            sumJudges: fins.reduce((res, fac) => ({...res, [fac]: judgeSumByFac(fac)}), {}),
+            audience: audience
+        };
 
-        // const {queue, ...data} = settingsFormatter(resultSettings, selectedRound);
-
+        console.log(resultJudges)
         setServerMessage(await summurizeServerResponse(
-            // saveSettings(resultSettings),
-            // saveData(data),
-            // saveRelease({
-            //     queue: queue,
-            //     released: [],
-            //     round: selectedRound, 
-            // }),
-            saveJudges(judges),
+            saveJudges(resultJudges),
         ));
     }
 
     const handleReset = async () => {
-        // setSelectedRound(0);
-        // setLastWinner('');
-        // setFacSettings(initSettings);
-        // setFacOrder(Object.keys(initSettings))
-        // setIsHideCheckbox(false);
+        const zeroPoints = fins.reduce((res, fin) => ({
+            ...res,
+            [fin]: 0,
+        }), {});
 
         setJudges(initSettings);
+        setAudience(zeroPoints)
         setFacOrder(Object.keys(initSettings));
         setIsHideCheckbox(false);
 
-
-        // saveSettings({});
-        // saveRelease({});
-        // saveData({});
-
         setServerMessage(await summurizeServerResponse(
-            // saveSettings({}),
-            // saveRelease({}),
-            // saveData({}),
-            saveJudges(judges),
+            saveJudges({}),
         ));
-
-        // const answers = await Promise.all([
-        //     saveSettings({}),
-        //     saveRelease({}),
-        //     saveData({}),
-        // ]);
-
-        // const isError = answers.some(ans => ans.status === 'error')
-        // setServerMessage(isError ? 'error' : 'ok');
     }
 
     return (
@@ -220,20 +254,26 @@ export default function ScoreSettings() {
                     </label>
 
             </div>
-            <table className='mainContent'>
+            <table>
                 <thead>
-                    <tr>
+                    <tr ref={columnsRef}>
                         <th className='firstColumn'></th>
-                        {fins.map((fin, index) => (
-                            <th key={index} className="rotatedHeader">
+                        {fins.map((fin) => (
+                            <th 
+                                data-id={fin}
+                                key={fin} 
+                                className={cn('rotatedHeader', activeColumn === fin && 'activeColumn')}
+                                onMouseEnter={() => setActiveColumn(fin)}
+                                onMouseLeave={() => setActiveColumn(null)}
+                            >
                                 <div className='headerText'>{allFacs[fin].name}</div>
                             </th>
                         ))}
                     </tr> 
                 </thead>
-                <tbody ref={containerRef}>
-                    {Object.keys(judges).map((herald) => (
-                        <TableRow
+                <tbody ref={rowsRef} className='mainContent'>
+                    {facOrder.map((herald) => (
+                        (!isHideCheckbox || judges[herald].isVoited) && <TableRow
                             key={herald}
                             id={herald}
                             rowName={allFacs[herald].name}
@@ -241,22 +281,49 @@ export default function ScoreSettings() {
                             onChangeActive={(newValue) => updateOneFacIsVoited(herald, {isVoited: newValue})}
                             rowData={judges[herald].points}
                             onChangeCell={(newSetting) => updateOneFacOnePoint(herald, newSetting)}
+                            activeColumn={activeColumn}
+                            setActiveColumn={setActiveColumn}
                         />
                     ))}
                 </tbody>
                 <tfoot>
-                    
+                     <tr className='total'>
+                        <td className='firstColumn'>Итого за жюри</td>
+                        {fins.map((fin) => (
+                            <td key={fin}>{judgeSumByFac(fin)}</td>
+                        ))}
+                    </tr> 
+                     <tr className='total'>
+                        <td className='firstColumn'>Зрительские</td>
+                        {fins.map((fin) => (
+                            <td key={fin}>
+                                <input 
+                                    type='number'
+                                    placeholder='0'
+                                    disabled={false}
+                                    value={audience[fin]  || ''}
+                                    onChange={(e) => updateAudienceScore(fin, Number(e.target.value))}
+                                />
+                            </td>
+                        ))}
+                    </tr> 
+                     <tr className='total'>
+                        <td className='firstColumn'>Итоговый итог</td>
+                        {fins.map((fin) => (
+                            <td key={fin}>{allPointsByFac(fin)}</td>
+                        ))}
+                    </tr> 
                 </tfoot>
             </table>
             
 
             <div className='footer'>
                 <Button type={'primary'} onClick={handleSave}>Сохранить</Button>
-                
-                <Button type={'secondary'} onClick={handleReset}>Сбросить всё на#уй</Button>
                 <Link to="/settings">
-                    <Button type={'dangerous'}>К настройкам</Button>
+                    <Button type={'primary__light'}>К настройкам</Button>
                 </Link>
+                <Button type={'secondary'} onClick={handleReset}>Сбросить всё на#уй</Button>
+                
                 <Link to="/settings/release">
                     <Button type={'dangerous'}>К релизу</Button>
                 </Link>

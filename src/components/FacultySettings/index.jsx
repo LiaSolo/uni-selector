@@ -19,10 +19,10 @@ export default function FacultySettings({
     showOption = 0,
 }
 ) { 
-    const finalist = isLastWinner || isFinal;
+    //const finalist = isLastWinner || isFinal;
     const isDisplay = (showOption === 0 
         || (!isLastWinner && showOption === semi && isParticipant) 
-        || (showOption === 3 && finalist && isParticipant)
+        || (showOption === 3 && isFinal && isParticipant)
     )
 
     return (
@@ -50,11 +50,11 @@ export default function FacultySettings({
                             />
                             <input 
                                 type='checkbox' 
-                                checked={finalist}
+                                checked={isFinal}
                                 disabled={isLastWinner}
                                 onChange={(e) => serverUpdate({isFinal: e.target.checked})}
                             />
-                            {finalist &&
+                            {/* {isFinal &&
                                 <>
                                     <ScoreInput 
                                         label="жюри" 
@@ -67,7 +67,7 @@ export default function FacultySettings({
                                         setCurScore={(newValue) => serverUpdate({scoreAudience: newValue})}
                                     />
                                 </>
-                            }
+                            } */}
                         </> 
                     }
                 </div>

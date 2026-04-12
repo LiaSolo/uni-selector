@@ -5,7 +5,7 @@ import {motion} from 'framer-motion'
 import RadioButton from '../components/radioButton';
 import Button from '../components/Button';
 import { allFacs } from '../config';
-import { getData, getRelease, getSettings, saveData, saveRelease } from '../services/api';
+import { getData, getJudges, getRelease, getSettings, saveData, saveRelease } from '../services/api';
 import { settingsFormatter } from '../services/settingsFormatter';
 import Faculty from '../components/Faculty';
 import cn from 'classnames';
@@ -15,7 +15,8 @@ const helpText = [
     'Раунд не выбран',
     'Сейчас 1 полуфинал',
     'Сейчас 2 полуфинал',
-    'Сейчас финал'
+    'Сейчас глашатаи',
+    'Сейчас зрители',
 ];
 
 
@@ -23,18 +24,20 @@ export default function Release() {
     const [selectedRound, setSelectedRound] = useState(0);
     const [queue, setQueue] = useState([]);
     const [released, setReleased] = useState([]);
+    //const [queueLength, setQueueLength] = useState([]);
     const [disableNext, setDisableNext] = useState(true); 
     const [serverMessage, setServerMessage] = useState(''); 
     
     const releaseFormatter = useCallback((rawSettings) => {
         rawSettings.round && setSelectedRound(rawSettings.round);
         rawSettings.released && setReleased(rawSettings.released);
+        //rawSettings.queueLength && setQueueLength(rawSettings.queueLength);
         rawSettings.queue && setQueue(rawSettings.queue);
-    }, [])
+    }, []);
 
     const setDataAndQueue = useCallback(async (rawSettings) => {
         const {queue, ...data} = settingsFormatter(rawSettings, selectedRound);
-
+        console.log(queue)
         setQueue(queue);
         setReleased([]);
 
@@ -49,21 +52,20 @@ export default function Release() {
 
     }, [selectedRound]);
 
-    useEffect(() => {
-        setDisableNext(!selectedRound || released.length === queue.length)
-    }, [released, queue, selectedRound]);
-
-    useEffect(() => {
-+-        setTimeout(() => {serverMessage && setServerMessage('')}, 5000)
-    }, [serverMessage]);
-
     const syncReleaseData = useCallback((data) => {
         if (data.round === selectedRound) {
             return;
         }
 
+        if (selectedRound >= 3) {
+            getJudges(setDataAndQueue);
+            return;
+        }
+        
         getSettings(setDataAndQueue);
     }, [selectedRound, setDataAndQueue]);
+
+
 
     useEffect(() => {
         getRelease(releaseFormatter);
@@ -74,12 +76,44 @@ export default function Release() {
         selectedRound && getData(syncReleaseData);
     }, [selectedRound, syncReleaseData]);
 
+    
+
+    useEffect(() => {
+        setDisableNext(!selectedRound || released.length === queue.length)
+    }, [released, queue, selectedRound]);
+
+    useEffect(() => {
++-        setTimeout(() => {serverMessage && setServerMessage('')}, 5000)
+    }, [serverMessage]);
+
 
     const handleNext = async () => {
         if (released.length < queue.length) {
-            const newReleased = [...released, queue[released.length]];
-            setReleased(newReleased);
+            const curReleased = structuredClone(queue[released.length]);
+            
+            if (selectedRound === 3) {
+                const prevReleased = released.at(-1);
+                const prevPoints = prevReleased?.points ?? {};
 
+                Object.entries(curReleased.points).forEach(([fin, points]) => {
+                    curReleased.points[fin] = {
+                        curAdded: points, 
+                        total: points + (prevPoints[fin]?.total || 0),
+                    };
+                });
+
+                Object.keys(prevPoints).forEach((fac) => {
+                    curReleased.points[fac] ??= {
+                        curAdded: 0,
+                        total: prevPoints[fac]?.total,
+                    }
+                });
+            }
+
+            const newReleased = [...released, curReleased];
+            
+            //console.log(curReleased, newReleased);
+            setReleased(newReleased);
             setServerMessage(await summurizeServerResponse(
                 saveRelease({
                     queue: queue,
@@ -123,6 +157,7 @@ export default function Release() {
             return;
         }
 
+        // просто поменять очередь и вызвать handleNext
         const filteredQueue = queue.filter(fac => fac !== clickedFac);
         const newReleased = released.concat([clickedFac]);
         const newQueue = newReleased.concat(filteredQueue.slice(released.length));
@@ -158,9 +193,14 @@ export default function Release() {
                         onChange={() => setSelectedRound(2)}
                     />
                     <RadioButton 
-                        label="финал"
+                        label="глашатаи"
                         isSelected={selectedRound === 3}
                         onChange={() => setSelectedRound(3)}
+                    />
+                    <RadioButton 
+                        label="зрители"
+                        isSelected={selectedRound === 4}
+                        onChange={() => setSelectedRound(4)}
                     />
                 </span>
             </div>
@@ -169,15 +209,26 @@ export default function Release() {
                 <span>выпущены</span>
             </div>
             <div className='mainContent'>
-               {queue.map((fac) => 
-                    <motion.div layout key={fac} transition={{ duration: 1 }}>
-                        <Faculty 
-                            key={fac} 
-                            facultyInfo={allFacs[fac]} 
-                            className={released.includes(fac) ? 'released' : ''}
-                            onDoubleClick={() => handleDoubleClick(fac)}
-                        />
-                    </motion.div>
+               {queue.map((fac, index) => {
+                    const facName =  fac.name ?? fac;
+                    //console.log(fac, facName)
+                    const isReleased = index < released.length;
+
+                    // if (selectedRound > 2) {
+                    //     released.some(fin => fin.name ===)
+                    // }
+
+
+                    
+                    return (
+                            <Faculty 
+                                key={`${facName}-${index}`}
+                                facultyInfo={allFacs[facName]} 
+                                className={isReleased? 'released' : ''}
+                                onDoubleClick={() => handleDoubleClick(facName)}
+                            />
+                        )
+                    }
                 )} 
             </div>
             

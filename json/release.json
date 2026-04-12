@@ -1,18 +1,102 @@
 {
   "queue": [
-    "mm",
-    "libarts",
-    "kio",
-    "fmo",
-    "psych",
-    "med",
-    "philolog",
-    "vostok",
-    "arts",
-    "politfuck",
-    "teo",
-    "law"
+    {
+      "name": "vostok",
+      "curAdded": 1,
+      "total": 2
+    },
+    {
+      "name": "philos",
+      "curAdded": 0,
+      "total": 2
+    },
+    {
+      "name": "fmo",
+      "curAdded": 0,
+      "total": 3
+    },
+    {
+      "name": "law",
+      "curAdded": 0,
+      "total": 4
+    },
+    {
+      "name": "arts",
+      "curAdded": 20,
+      "total": 29
+    },
+    {
+      "name": "philolog",
+      "curAdded": 0,
+      "total": 12
+    },
+    {
+      "name": "mm",
+      "curAdded": 15,
+      "total": 27
+    },
+    {
+      "name": "teo",
+      "curAdded": 0,
+      "total": 13
+    },
+    {
+      "name": "psych",
+      "curAdded": 0,
+      "total": 16
+    },
+    {
+      "name": "med",
+      "curAdded": 0,
+      "total": 16
+    },
+    {
+      "name": "libarts",
+      "curAdded": 0,
+      "total": 19
+    },
+    {
+      "name": "politfuck",
+      "curAdded": 0,
+      "total": 20
+    }
   ],
-  "released": [],
-  "round": 3
+  "released": [
+    {
+      "name": "vostok",
+      "curAdded": 1,
+      "total": 2
+    },
+    {
+      "name": "philos",
+      "curAdded": 0,
+      "total": 2
+    },
+    {
+      "name": "fmo",
+      "curAdded": 0,
+      "total": 3
+    },
+    {
+      "name": "law",
+      "curAdded": 0,
+      "total": 4
+    },
+    {
+      "name": "arts",
+      "curAdded": 20,
+      "total": 29
+    },
+    {
+      "name": "philolog",
+      "curAdded": 0,
+      "total": 12
+    },
+    {
+      "name": "mm",
+      "curAdded": 15,
+      "total": 27
+    }
+  ],
+  "round": 4
 }

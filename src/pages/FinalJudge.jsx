@@ -1,102 +1,101 @@
 import '../scss/mainPage.scss';
 import {allFacs} from "../config";
 import {motion} from 'framer-motion'
-import {useEffect, useState} from "react";;
+import {useEffect, useLayoutEffect, useState} from "react";;
 import Faculty from '../components/Faculty';
-import { getData, getRelease, getJudges, useCustomWebSocket } from '../services/api';
+import { getData, getRelease, useCustomWebSocket } from '../services/api';
 import ProgressBar from '../components/ProgressBar';
+import cn from 'classnames';
 
-const points = [10, 8, 6, 5, 4, 3, 2, 1]
+const basePoints = [8, 6, 5, 4, 3, 2, 1]
 
 export default function FinalJudge() {
-    const [finalists, setFinalists] = useState(null);
     const [finsOrdered, setFinsOrdered] = useState([]);
-    const [released, setReleased] = useState(null); // глашатаи, которых показали
+    const [released, setReleased] = useState([]); // глашатаи, которых показали
     const [releasedLength, setReleasedLength] = useState(0);
-    const [queue, setQueue] = useState(null); // глашатаи все
-    const [judgeScore, setJudgeScore] = useState(null); //все баллы глашатаев
-    // const [curAddedPoints, setCurAddedPoints] = useState('');
-    // const [pointsAnimation, setPointsAnimation] = useState('');
+    const [queueLength, setQueueLength] = useState(0); // кол-во глашатаев
 
-    useEffect(() => {
-        // начальное состояние: в порядке выступления
-        getData((data) => setFinalists(data.parts));
-        getRelease((data) => {
-            setReleased(data.released);
-            setReleasedLength(data.released.length);
-            setQueue(data.queue);
-        });
-        getJudges(setJudgeScore);
-    }, [])
-
-    useEffect(() => {
-        if (!finalists || !released || !queue) {
-            console.log('Недостаточно данных!');
-            return;
-        }
-
-        const newData = Object.entries(finalists).map(
-            ([fin, points]) => [
-                fin, 
-                points.judge + (released.includes(fin) ? points.audience : 0),
-            ]
-        );
-        
-        newData.sort((a, b) => b[1] - a[1]);
-        setFinsOrdered(newData);
+    const [curAddedPoints, setCurAddedPoints] = useState({points: {}});
+    const [pointsAnimation, setPointsAnimation] = useState('');
     
-    }, [finalists, released, queue]);
-
     const lastJsonMessage = useCustomWebSocket();
 
     useEffect(() => {
+        getData((data) => {
+            setFinsOrdered(data.parts);
+        });
+        getRelease((data) => {
+            setReleased(data.released);
+            setQueueLength(data.queue.length / 2);
+        });
+    }, [])
+
+
+    useLayoutEffect(() => {
+        console.log('lastJsonMessage', lastJsonMessage)
         if (lastJsonMessage && lastJsonMessage.type === 'data-updated') {
-            const newReleased = lastJsonMessage.data; 
-            setReleased(newReleased);
+            //setReleased(prev => [...prev, lastJsonMessage.data]);
+            setReleased(lastJsonMessage.data);
+        }
+    }, [lastJsonMessage]);
 
-            // if (!newReleased.length) {
-            //     setCurAddedPoints('');
-            //     return;
-            // }
+    useLayoutEffect(() => {
+        setReleasedLength(Math.ceil(released.length / 2));
 
-            const lastReleased = newReleased[newReleased.length - 1];
-            // setCurAddedPoints(finalists[lastReleased].audience);
-            // setPointsAnimation('animatedPoints');
-            // setTimeout(() => setPointsAnimation(''), 1000);
+        if (released.length === 0) {
+            setCurAddedPoints({points: {}});
+            setPointsAnimation('');
 
-            setFinsOrdered(prev => {
-                // const newOrder = prev.map(([fac, points]) => 
-                //     fac === lastReleased
-                //         ? [fac, finalists[fac]?.judge + finalists[fac]?.audience]
-                //         : [fac, points]
-                // );
-                const newOrder = prev.map(([fac, points]) => [
-                    fac, 
-                    points + (judgeScore[lastReleased][fac] || 0)
-                ]);
-                // const newOrder = prev.toSorted(([facA, pointsA], [facB, pointsB]) => 
-                //     fac === lastReleased
-                //         ? [fac, finalists[fac]?.judge + finalists[fac]?.audience]
-                //         : [fac, points]
-                // );
-                return newOrder.sort((a, b) => b[1] - a[1]);
+            return;
+        }
+
+        const lastReleased = released.at(-1);
+        const isNewFaculty = (released.length % 2); // 0 => false, 1 => true
+
+        if (isNewFaculty) {
+            setPointsAnimation('');
+            setCurAddedPoints(prev => {
+                const tempPoints = {...prev.points};
+
+                Object.keys(prev.points).forEach((fac) => {
+                    tempPoints[fac].curAdded = 0;
+                });
+
+                return { name: lastReleased.name, points: tempPoints };
             });
         }
-    }, [lastJsonMessage, finalists, judgeScore]);
+
+        setTimeout(() => {
+            setPointsAnimation('awarded');
+            setCurAddedPoints(lastReleased);
+        }, isNewFaculty ? 3000 : 0);
+
+    }, [released]);
+
+    useLayoutEffect(() => {
+        if (!Object.keys(curAddedPoints.points).length) {
+            return;
+        }
+
+        setFinsOrdered(prev => prev.toSorted((a, b) =>
+            curAddedPoints.points[b].total - curAddedPoints.points[a].total,
+        ));
+
+    }, [curAddedPoints]);
 
     return (
             <div className="App">
-                <div className="right">
+                <div className="thinSide">
                     <div className="logo"/>
                     <div className="FacultyPointList">
                         {
-                            Object.values(finsOrdered).map(([fac, points]) =>
-                                <motion.div layout key={fac} transition={{ duration: 1 }}>
+                            finsOrdered.map((fac) =>
+                                <motion.div layout key={fac} transition={{ duration: 1, delay: 2 }}>
                                     <Faculty 
                                         key={fac} 
                                         facultyInfo={allFacs[fac]}
-                                        curPoints={judgeScore[released[releasedLength - 1]][fac] || 0} 
-                                        allPoints={points}
+                                        curPoints={curAddedPoints.points[fac]?.curAdded || ''} 
+                                        allPoints={curAddedPoints.points[fac]?.total || 0}
                                     />
                                 </motion.div>
                             )
@@ -104,12 +103,13 @@ export default function FinalJudge() {
                     </div>
                     
                 </div>
-                <div className="right">
-                    <div className="video">{released && released[releasedLength - 1]}</div>
-                    <ProgressBar label={`Проголосовало факультетов ${releasedLength} из ${queue?.length || 0}`}
-                    curProgress={queue?.length && releasedLength / queue?.length * 100 || 0}/>
+                <div className="thinSide">
+                    <div className="video">{curAddedPoints.name}</div>
+                    <ProgressBar label={`Проголосовало факультетов ${releasedLength} из ${queueLength}`}
+                    curProgress={releasedLength / (queueLength || 1) * 100 || 0}/>
                     <div className='pointsLine'>
-                        {points.map(point => <span key={point} className='point'>{point}</span>)}
+                        <span className={cn('point', 'highScore', releasedLength && !(released.length % 2) && 'awarded')}>10</span>
+                        {basePoints.map(point => <span key={point} className={cn('point', pointsAnimation)}>{point}</span>)}
                     </div>
                 </div>
             </div>

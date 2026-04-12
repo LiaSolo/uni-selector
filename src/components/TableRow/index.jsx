@@ -1,5 +1,17 @@
 import './styles.scss'
+import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
+
+const pointClass = {
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    8: 'eight',
+    10: 'ten',
+}
 
 export default function TableRow({
     id,
@@ -8,11 +20,13 @@ export default function TableRow({
     rowData = {},
     isActive = true,
     onChangeActive = val => console.log(val),
+    activeColumn,
+    setActiveColumn,
 }) {
-    //console.log(rowName, rowData)
+    //console.log(rowName, isActive, rowData)
     return(
-        <tr>
-            <td className='firstColumn'>
+        <tr data-id={id}>
+            <td className={cn('firstColumn', !isActive && 'disabled')}>
                 <input 
                     type='checkbox'
                     checked={isActive}
@@ -22,11 +36,18 @@ export default function TableRow({
                 
             </td>
             {Object.keys(rowData).map((cell) => (
-                <td key={cell}>
+                <td 
+                    key={cell}
+                    className={activeColumn === cell ? 'activeColumn' : ''}
+                    onMouseEnter={() => setActiveColumn(cell)}
+                    onMouseLeave={() => setActiveColumn(null)}
+                >
                     <input 
                         type='number'
-                        disabled={cell === id}
-                        value={cell !== id ? rowData[cell] : ''}
+                        placeholder='0'
+                        disabled={!isActive || cell === id}
+                        value={rowData[cell] || ''}
+                        className={pointClass[rowData[cell]] ?? ''}
                         onChange={(e) => onChangeCell({[cell]: Number(e.target.value)})}
                     />
                 </td>

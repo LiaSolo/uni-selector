@@ -24,6 +24,7 @@ button {
     border: 1px solid transparent;
     border-radius: 8px;
     transition: all 0.5s;
+    cursor: pointer;
 }
 
 button:hover {
@@ -40,7 +41,3 @@ button:disabled {
     border-color: transparent;
     cursor: not-allowed;
 }
-
-// .disabled {
-//     cursor: not-allowed;
-// }

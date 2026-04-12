@@ -1,53 +1,17 @@
 {
   "parts": {
-    "law": {
-      "judge": 90,
-      "audience": 6
-    },
-    "teo": {
-      "judge": 0,
-      "audience": 0
-    },
-    "politfuck": {
-      "judge": "0",
-      "audience": "0"
-    },
-    "arts": {
-      "judge": 0,
-      "audience": 0
-    },
-    "vostok": {
-      "judge": 0,
-      "audience": 0
-    },
-    "philolog": {
-      "judge": 0,
-      "audience": 0
-    },
-    "med": {
-      "judge": 0,
-      "audience": 0
-    },
-    "psych": {
-      "judge": "0",
-      "audience": "0"
-    },
-    "fmo": {
-      "judge": "0",
-      "audience": "0"
-    },
-    "kio": {
-      "judge": 0,
-      "audience": 0
-    },
-    "libarts": {
-      "judge": 0,
-      "audience": 0
-    },
-    "mm": {
-      "judge": 0,
-      "audience": 0
-    }
+    "vostok": 1,
+    "arts": 9,
+    "mm": 12,
+    "med": 16,
+    "politfuck": 20,
+    "psych": 16,
+    "libarts": 19,
+    "teo": 13,
+    "philolog": 12,
+    "philos": 2,
+    "fmo": 3,
+    "law": 4
   },
-  "round": 3
+  "round": 4
 }

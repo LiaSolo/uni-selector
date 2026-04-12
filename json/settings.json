@@ -114,7 +114,7 @@
     },
     "kio": {
       "semi": 2,
-      "isFinal": true,
+      "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
@@ -177,14 +177,14 @@
     },
     "philos": {
       "semi": 2,
-      "isFinal": false,
+      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
     },
     "law": {
       "semi": 1,
-      "isFinal": false,
+      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 90,
       "scoreAudience": 6
