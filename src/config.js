@@ -121,7 +121,7 @@ export const allFacs = {
     },
     pmpu: {
         name: "ПМ-ПУ",
-        color: "#00ff2a",
+        color: "#00aaff",
         logo: "pmpu.png",
         styles: {
             'background': 'linear-gradient(76deg, rgb(0, 255, 145) 0%, rgb(0, 204, 51) 100%)'
