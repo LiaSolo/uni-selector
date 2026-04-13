@@ -711,6 +711,165 @@
           "total": 4
         }
       }
+    },
+    {
+      "name": "gimn",
+      "points": {
+        "teo": {
+          "curAdded": 10,
+          "total": 10
+        },
+        "vostok": {
+          "curAdded": 0,
+          "total": 1
+        },
+        "arts": {
+          "curAdded": 0,
+          "total": 2
+        },
+        "mm": {
+          "curAdded": 0,
+          "total": 3
+        },
+        "med": {
+          "curAdded": 0,
+          "total": 4
+        },
+        "politfuck": {
+          "curAdded": 0,
+          "total": 5
+        },
+        "psych": {
+          "curAdded": 0,
+          "total": 6
+        },
+        "libarts": {
+          "curAdded": 0,
+          "total": 8
+        },
+        "philolog": {
+          "curAdded": 0,
+          "total": 1
+        },
+        "philos": {
+          "curAdded": 0,
+          "total": 2
+        },
+        "fmo": {
+          "curAdded": 0,
+          "total": 3
+        },
+        "law": {
+          "curAdded": 0,
+          "total": 4
+        }
+      }
+    },
+    {
+      "name": "bio",
+      "points": {
+        "vostok": {
+          "curAdded": 0,
+          "total": 1
+        },
+        "arts": {
+          "curAdded": 2,
+          "total": 4
+        },
+        "mm": {
+          "curAdded": 3,
+          "total": 6
+        },
+        "med": {
+          "curAdded": 4,
+          "total": 8
+        },
+        "politfuck": {
+          "curAdded": 5,
+          "total": 10
+        },
+        "psych": {
+          "curAdded": 6,
+          "total": 12
+        },
+        "libarts": {
+          "curAdded": 8,
+          "total": 16
+        },
+        "teo": {
+          "curAdded": 1,
+          "total": 11
+        },
+        "philolog": {
+          "curAdded": 0,
+          "total": 1
+        },
+        "philos": {
+          "curAdded": 0,
+          "total": 2
+        },
+        "fmo": {
+          "curAdded": 0,
+          "total": 3
+        },
+        "law": {
+          "curAdded": 0,
+          "total": 4
+        }
+      }
+    },
+    {
+      "name": "bio",
+      "points": {
+        "philolog": {
+          "curAdded": 10,
+          "total": 11
+        },
+        "vostok": {
+          "curAdded": 0,
+          "total": 1
+        },
+        "arts": {
+          "curAdded": 0,
+          "total": 4
+        },
+        "mm": {
+          "curAdded": 0,
+          "total": 6
+        },
+        "med": {
+          "curAdded": 0,
+          "total": 8
+        },
+        "politfuck": {
+          "curAdded": 0,
+          "total": 10
+        },
+        "psych": {
+          "curAdded": 0,
+          "total": 12
+        },
+        "libarts": {
+          "curAdded": 0,
+          "total": 16
+        },
+        "teo": {
+          "curAdded": 0,
+          "total": 11
+        },
+        "philos": {
+          "curAdded": 0,
+          "total": 2
+        },
+        "fmo": {
+          "curAdded": 0,
+          "total": 3
+        },
+        "law": {
+          "curAdded": 0,
+          "total": 4
+        }
+      }
     }
   ],
   "round": 3
