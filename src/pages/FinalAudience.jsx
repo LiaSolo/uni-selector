@@ -42,6 +42,7 @@ export default function Final() {
     }, [])
 
     useLayoutEffect(() => {
+    //console.log(released)
         if (!finalists || !released) {
             return;
         }
@@ -54,23 +55,16 @@ export default function Final() {
 
     useLayoutEffect(() => {
         if (lastJsonMessage && lastJsonMessage.type === 'data-updated') {
-
-            //setReleased(releaseFormatter(lastJsonMessage.data));
+            setReleased(releaseFormatter(lastJsonMessage.data));
 
             if (!lastJsonMessage.data.length) {
                 setCurAddedPoints('');
                 setPointsAnimation('');
-                setReleased({});
 
                 return;
             }
 
             const lastReleased = lastJsonMessage.data.at(-1);
-            //const facName = Object.keys(lastReleased)[0];
-            setReleased(prev => ({
-                ...prev,
-                [lastReleased.name]: lastReleased.total,
-            }))
 
             setCurAddedPoints(lastReleased.curAdded);
             setPointsAnimation('animatedPoints');

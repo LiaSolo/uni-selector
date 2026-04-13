@@ -32,7 +32,7 @@ export default function FinalJudge() {
 
 
     useLayoutEffect(() => {
-        console.log('lastJsonMessage', lastJsonMessage)
+        //console.log('lastJsonMessage', lastJsonMessage)
         if (lastJsonMessage && lastJsonMessage.type === 'data-updated') {
             //setReleased(prev => [...prev, lastJsonMessage.data]);
             setReleased(lastJsonMessage.data);

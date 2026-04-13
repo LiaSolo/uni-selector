@@ -1,17 +1,17 @@
 {
-  "parts": {
-    "vostok": 1,
-    "arts": 9,
-    "mm": 12,
-    "med": 16,
-    "politfuck": 20,
-    "psych": 16,
-    "libarts": 19,
-    "teo": 13,
-    "philolog": 12,
-    "philos": 2,
-    "fmo": 3,
-    "law": 4
-  },
-  "round": 4
+  "parts": [
+    "vostok",
+    "arts",
+    "mm",
+    "med",
+    "politfuck",
+    "psych",
+    "libarts",
+    "teo",
+    "philolog",
+    "philos",
+    "fmo",
+    "law"
+  ],
+  "round": 3
 }
