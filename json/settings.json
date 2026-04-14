@@ -7,27 +7,6 @@
       "scoreJudge": 99,
       "scoreAudience": 10
     },
-    "teo": {
-      "semi": 1,
-      "isFinal": true,
-      "isParticipant": true,
-      "scoreJudge": 0,
-      "scoreAudience": 0
-    },
-    "libarts": {
-      "semi": 1,
-      "isFinal": true,
-      "isParticipant": true,
-      "scoreJudge": 0,
-      "scoreAudience": 0
-    },
-    "psych": {
-      "semi": 1,
-      "isFinal": true,
-      "isParticipant": true,
-      "scoreJudge": "0",
-      "scoreAudience": "0"
-    },
     "econ": {
       "semi": 2,
       "isFinal": true,
@@ -41,6 +20,34 @@
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
+    },
+    "philolog": {
+      "semi": 2,
+      "isFinal": true,
+      "isParticipant": true,
+      "scoreJudge": 0,
+      "scoreAudience": 0
+    },
+    "libarts": {
+      "semi": 1,
+      "isFinal": true,
+      "isParticipant": true,
+      "scoreJudge": 0,
+      "scoreAudience": 0
+    },
+    "teo": {
+      "semi": 1,
+      "isFinal": true,
+      "isParticipant": true,
+      "scoreJudge": 0,
+      "scoreAudience": 0
+    },
+    "psych": {
+      "semi": 1,
+      "isFinal": true,
+      "isParticipant": true,
+      "scoreJudge": "0",
+      "scoreAudience": "0"
     },
     "soc": {
       "semi": 1,
@@ -87,13 +94,6 @@
     "hist": {
       "semi": 1,
       "isFinal": false,
-      "isParticipant": true,
-      "scoreJudge": 0,
-      "scoreAudience": 0
-    },
-    "philolog": {
-      "semi": 2,
-      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
