@@ -1,9 +1,9 @@
 {
   "parts": [
     "vostok",
-    "arts",
-    "mm",
-    "med",
+    "media",
+    "kio",
+    "mkn",
     "politfuck",
     "psych",
     "libarts",
@@ -11,6 +11,7 @@
     "philolog",
     "philos",
     "fmo",
+    "econ",
     "law"
   ],
   "round": 3

@@ -7,12 +7,33 @@
       "scoreJudge": 99,
       "scoreAudience": 10
     },
+    "teo": {
+      "semi": 1,
+      "isFinal": true,
+      "isParticipant": true,
+      "scoreJudge": 0,
+      "scoreAudience": 0
+    },
+    "libarts": {
+      "semi": 1,
+      "isFinal": true,
+      "isParticipant": true,
+      "scoreJudge": 0,
+      "scoreAudience": 0
+    },
     "psych": {
       "semi": 1,
       "isFinal": true,
       "isParticipant": true,
       "scoreJudge": "0",
       "scoreAudience": "0"
+    },
+    "econ": {
+      "semi": 2,
+      "isFinal": true,
+      "isParticipant": true,
+      "scoreJudge": 0,
+      "scoreAudience": 0
     },
     "vostok": {
       "semi": 1,
@@ -27,13 +48,6 @@
       "isParticipant": true,
       "scoreJudge": 60,
       "scoreAudience": 50
-    },
-    "libarts": {
-      "semi": 1,
-      "isFinal": true,
-      "isParticipant": true,
-      "scoreJudge": 0,
-      "scoreAudience": 0
     },
     "politfuck": {
       "semi": 1,
@@ -55,13 +69,6 @@
       "isParticipant": true,
       "scoreJudge": "0",
       "scoreAudience": "0"
-    },
-    "teo": {
-      "semi": 1,
-      "isFinal": true,
-      "isParticipant": true,
-      "scoreJudge": 0,
-      "scoreAudience": 0
     },
     "hsm": {
       "semi": 1,
@@ -93,7 +100,7 @@
     },
     "med": {
       "semi": 2,
-      "isFinal": true,
+      "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
@@ -114,28 +121,21 @@
     },
     "kio": {
       "semi": 2,
-      "isFinal": false,
-      "isParticipant": true,
-      "scoreJudge": 0,
-      "scoreAudience": 0
-    },
-    "econ": {
-      "semi": 2,
-      "isFinal": false,
+      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
     },
     "mm": {
       "semi": 2,
-      "isFinal": true,
+      "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
     },
     "arts": {
       "semi": 2,
-      "isFinal": true,
+      "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
@@ -149,14 +149,14 @@
     },
     "media": {
       "semi": 2,
-      "isFinal": false,
+      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
     },
     "mkn": {
       "semi": 2,
-      "isFinal": false,
+      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
