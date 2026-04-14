@@ -52,7 +52,7 @@ h1 {
     width: 820px;
 }
 
-.winnersList, .FacultyPointList {
+.winnersList {
     @include baseColumn;
     flex-wrap: wrap;
     gap: 16px;
@@ -60,7 +60,10 @@ h1 {
 }
 
 .FacultyPointList {
-    max-height: 50vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    //max-height: 60vh; //50vh
 }
 
 .pointsLine {
@@ -144,13 +147,33 @@ h1 {
     font-size: 60px;
 }
 
+// .video {
+//     mask-image: 
+//         linear-gradient(black, black),  // весь слой
+//         // форма вашего .video блока
+//         radial-gradient(black, black);  // вырез
+    
+//     mask-size: 
+//         100% 100%,
+//         // размер вашего блока
+//         800px calc(800px * 9 / 16);
+    
+//     // mask-position: 
+//     //     0 0,
+//     //     center center; // позиция выреза
+    
+//     mask-repeat: no-repeat;
+//     mask-composite: exclude; // 👈 вырезаем второй слой из первого
+// }
+
+
 .logo {
     background-image: url(/assets/Logo.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 
-    width: 100%;
+    width: 80%;
     aspect-ratio: 16 / 9;
     margin: auto 0;
     //background-color: pink;

@@ -105,6 +105,16 @@ export default function FinalJudge() {
                 </div>
                 <div className="thinSide">
                     <div className="video">{curAddedPoints.name}</div>
+                    {/* <video 
+                        className='video'
+                        src="/video.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        controls
+                        playsinline
+                    >
+                    </video> */}
                     <ProgressBar label={`Проголосовало факультетов ${releasedLength} из ${queueLength}`}
                     curProgress={releasedLength / (queueLength || 1) * 100 || 0}/>
                     <div className='pointsLine'>

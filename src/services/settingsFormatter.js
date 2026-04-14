@@ -123,11 +123,15 @@ export const settingsFormatter = (rawSettings, round) => {
         //     [fin]: rawSettings.audience[fin],
         // }));
         
+        
         const queue = finSorted.toReversed().map((fin) => ({
             name: fin,
             curAdded: rawSettings.audience[fin],
             total: rawSettings.audience[fin] + rawSettings.sumJudges[fin],
         }));
+        
+        console.log(queue)
+
 
         return ({
             parts: parts,
