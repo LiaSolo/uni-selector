@@ -2540,6 +2540,144 @@
           "total": 0
         }
       }
+    },
+    {
+      "name": "inoz",
+      "points": {
+        "vostok": {
+          "curAdded": 0,
+          "total": 81
+        },
+        "media": {
+          "curAdded": 0,
+          "total": 59
+        },
+        "kio": {
+          "curAdded": 0,
+          "total": 33
+        },
+        "mkn": {
+          "curAdded": 0,
+          "total": 22
+        },
+        "politfuck": {
+          "curAdded": 0,
+          "total": 20
+        },
+        "psych": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "libarts": {
+          "curAdded": 0,
+          "total": 25
+        },
+        "teo": {
+          "curAdded": 0,
+          "total": 48
+        },
+        "philolog": {
+          "curAdded": 0,
+          "total": 59
+        },
+        "philos": {
+          "curAdded": 0,
+          "total": 18
+        },
+        "fmo": {
+          "curAdded": 0,
+          "total": 43
+        },
+        "econ": {
+          "curAdded": 0,
+          "total": 40
+        },
+        "law": {
+          "curAdded": 0,
+          "total": 59
+        },
+        "arts": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "mm": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "med": {
+          "curAdded": 0,
+          "total": 0
+        }
+      }
+    },
+    {
+      "name": "politfuck",
+      "points": {
+        "vostok": {
+          "curAdded": 0,
+          "total": 81
+        },
+        "media": {
+          "curAdded": 0,
+          "total": 59
+        },
+        "kio": {
+          "curAdded": 0,
+          "total": 33
+        },
+        "mkn": {
+          "curAdded": 0,
+          "total": 22
+        },
+        "politfuck": {
+          "curAdded": 0,
+          "total": 20
+        },
+        "psych": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "libarts": {
+          "curAdded": 0,
+          "total": 25
+        },
+        "teo": {
+          "curAdded": 0,
+          "total": 48
+        },
+        "philolog": {
+          "curAdded": 0,
+          "total": 59
+        },
+        "philos": {
+          "curAdded": 0,
+          "total": 18
+        },
+        "fmo": {
+          "curAdded": 0,
+          "total": 43
+        },
+        "econ": {
+          "curAdded": 0,
+          "total": 40
+        },
+        "law": {
+          "curAdded": 0,
+          "total": 59
+        },
+        "arts": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "mm": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "med": {
+          "curAdded": 0,
+          "total": 0
+        }
+      }
     }
   ],
   "round": 3
