@@ -101,7 +101,6 @@
     "med": {
       "semi": 2,
       "isFinal": false,
-      "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
@@ -123,21 +122,19 @@
     "kio": {
       "semi": 2,
       "isFinal": true,
-      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
     },
     "mm": {
       "semi": 2,
-      "isFinal": true,
+      "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
     },
     "arts": {
       "semi": 2,
-      "isFinal": false,
       "isFinal": false,
       "isParticipant": true,
       "scoreJudge": 0,
@@ -153,14 +150,12 @@
     "media": {
       "semi": 2,
       "isFinal": true,
-      "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,
       "scoreAudience": 0
     },
     "mkn": {
       "semi": 2,
-      "isFinal": true,
       "isFinal": true,
       "isParticipant": true,
       "scoreJudge": 0,

@@ -52,19 +52,23 @@ h1 {
     width: 820px;
 }
 
-.winnersList {
+.winnersList, .FacultyPointList {
     @include baseColumn;
     flex-wrap: wrap;
     gap: 16px;
+
+    max-height: 60vh; //50vh
   
 }
 
-.FacultyPointList {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    //max-height: 60vh; //50vh
-}
+// .FacultyPointList {
+//     display: grid;
+//     column-count: 2;
+//     //grid-template-rows: repeat(7, 1fr);
+//     gap: 16px;
+//     //grid-auto-flow: column;
+//     //max-height: 60vh; //50vh
+// }
 
 .pointsLine {
     //font-size: 60px;

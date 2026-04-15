@@ -79,14 +79,20 @@ export default function Final() {
                     <div className="FacultyPointList">
                         {
                             finsOrdered.map((fac) =>
-                                <motion.div layout key={fac} transition={{ duration: 1 }}>
-                                    <Faculty 
-                                        key={fac} 
-                                        facultyInfo={allFacs[fac]} 
-                                        allPoints={released && released[fac] || finalists[fac]}
-                                        className={released && released[fac] ? 'allPoints' : ''}
-                                    />
-                                </motion.div>
+                                {
+                                    const isReleased = released?.[fac] ?? 0;
+                                    //console.log(fac, isReleased, released, released[fac])
+                                    return (
+                                        <motion.div layout key={fac} transition={{ duration: 1 }}>
+                                            <Faculty 
+                                                key={fac} 
+                                                facultyInfo={allFacs[fac]} 
+                                                allPoints={released?.[fac] || finalists[fac]}
+                                                className={fac in released  ? 'allPoints' : ''}
+                                            />
+                                        </motion.div>
+                                    )
+                                }
                             )
                         }
                     </div>

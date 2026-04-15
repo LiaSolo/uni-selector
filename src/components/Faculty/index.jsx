@@ -19,29 +19,41 @@ export default function Faculty({
     useLayoutEffect(() => {
         if (!facultyInfo) {
             setShowInfo(false);
-            return;
         }
-        
+    }, [facultyInfo]);
+
+    useEffect(() => {
+        // TODO: if  (isReleased)
         if (className === 'winnerReleased' || curPoints) {
             setGradient(true);
 
+            const timerInfo = 
+                setTimeout(() => {
+                    setShowInfo(true);
+                }, 1000);
+
+            const timerGradient =
+                setTimeout(() => {
+                    setGradient(false);
+                }, 2000);
+
+            return () => {
+                clearTimeout(timerInfo);
+                clearTimeout(timerGradient);
+            }        
+        }
+    }, [className, curPoints, allPoints])
+
+    useEffect(() => {
+        const timer =
             setTimeout(() => {
-                setShowInfo(true);
+                setPrevPoints({
+                    cur: curPoints,
+                    total: allPoints,
+                });
             }, 1000);
 
-            setTimeout(() => {
-                setGradient(false);
-            }, 2000);
-        }
-    }, [className, facultyInfo, curPoints]);
-
-    useLayoutEffect(() => {
-        setTimeout(() => {
-            setPrevPoints({
-                cur: curPoints,
-                total: allPoints,
-            });
-        }, 1000);
+        return () => clearTimeout(timer);
 
     }, [curPoints, allPoints])
 

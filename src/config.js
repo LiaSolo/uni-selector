@@ -113,7 +113,7 @@ export const allFacs = {
     },
     mkn: {
         name: "МКН",
-        color: "#32ff92",
+        color: "#2172be",
         logo: "mkn.png",
         styles: {
             'background': 'linear-gradient(98deg, rgb(63, 255, 127) 0%, rgb(71, 255, 252) 100%)'

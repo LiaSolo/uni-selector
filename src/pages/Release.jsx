@@ -1,5 +1,5 @@
 import '../scss/settingsPage.scss';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {motion} from 'framer-motion'
 import RadioButton from '../components/radioButton';
@@ -24,14 +24,12 @@ export default function Release() {
     const [selectedRound, setSelectedRound] = useState(0);
     const [queue, setQueue] = useState([]);
     const [released, setReleased] = useState([]);
-    //const [queueLength, setQueueLength] = useState([]);
     const [disableNext, setDisableNext] = useState(true); 
     const [serverMessage, setServerMessage] = useState(''); 
     
     const releaseFormatter = useCallback((rawSettings) => {
         rawSettings.round && setSelectedRound(rawSettings.round);
         rawSettings.released && setReleased(rawSettings.released);
-        //rawSettings.queueLength && setQueueLength(rawSettings.queueLength);
         rawSettings.queue && setQueue(rawSettings.queue);
     }, []);
 
@@ -76,9 +74,7 @@ export default function Release() {
         selectedRound && getData(syncReleaseData);
     }, [selectedRound, syncReleaseData]);
 
-    
-
-    useEffect(() => {
+    useLayoutEffect(() => {
         setDisableNext(!selectedRound || released.length === queue.length)
     }, [released, queue, selectedRound]);
 
@@ -88,12 +84,16 @@ export default function Release() {
 
 
     const handleNext = async () => {
+        console.log(queue)
         if (released.length < queue.length) {
             const curReleased = structuredClone(queue[released.length]);
             
             if (selectedRound === 3) {
                 const prevReleased = released.at(-1);
                 const prevPoints = prevReleased?.points ?? {};
+
+                console.log('prevReleased', prevReleased)
+                console.log('curReleased', curReleased)
 
                 Object.entries(curReleased.points).forEach(([fin, points]) => {
                     curReleased.points[fin] = {
@@ -112,7 +112,6 @@ export default function Release() {
 
             const newReleased = [...released, curReleased];
             
-            //console.log(curReleased, newReleased);
             setReleased(newReleased);
             setServerMessage(await summurizeServerResponse(
                 saveRelease({
@@ -138,7 +137,6 @@ export default function Release() {
         ));
     }
 
-
     const handleResetAll = async () => {
         setReleased([]);
 
@@ -151,9 +149,17 @@ export default function Release() {
         ));
     }
 
-    const handleDoubleClick = async  (clickedFac) => {
+    const handleDoubleClick = async (clickedFac) => {
+        if (selectedRound === 3) {
+            console.log('Глашатаев пока низзя');
+            setServerMessage('error');
+            return;
+        }
+
         if (released.includes(clickedFac)) {
-            console.log('Нельзя менять порядок уже выпущенных')
+            console.log('Нельзя менять порядок уже выпущенных');
+            setServerMessage('error');
+
             return;
         }
 
@@ -161,8 +167,11 @@ export default function Release() {
         const filteredQueue = queue.filter(fac => fac !== clickedFac);
         const newReleased = released.concat([clickedFac]);
         const newQueue = newReleased.concat(filteredQueue.slice(released.length));
-        
+        console.log('newQueue', newQueue)
         setQueue(newQueue);
+
+        //await handleNext();
+
         setReleased(newReleased);
 
         setServerMessage(await summurizeServerResponse(
@@ -211,21 +220,14 @@ export default function Release() {
             <div className='mainContent'>
                {queue.map((fac, index) => {
                     const facName =  fac.name ?? fac;
-                    //console.log(fac, facName)
-                    const isReleased = index < released.length;
+                    const isReleased = index < released.length;  
 
-                    // if (selectedRound > 2) {
-                    //     released.some(fin => fin.name ===)
-                    // }
-
-
-                    
                     return (
                             <Faculty 
                                 key={`${facName}-${index}`}
                                 facultyInfo={allFacs[facName]} 
                                 className={isReleased? 'released' : ''}
-                                onDoubleClick={() => handleDoubleClick(facName)}
+                                onDoubleClick={() => handleDoubleClick(fac)} //facName
                             />
                         )
                     }
