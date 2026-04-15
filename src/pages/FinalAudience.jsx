@@ -80,7 +80,7 @@ export default function Final() {
                         {
                             finsOrdered.map((fac) =>
                                 {
-                                    const isReleased = released?.[fac] ?? 0;
+                                    //const isReleased = released?.[fac] ?? 0;
                                     //console.log(fac, isReleased, released, released[fac])
                                     return (
                                         <motion.div layout key={fac} transition={{ duration: 1 }}>
@@ -88,7 +88,7 @@ export default function Final() {
                                                 key={fac} 
                                                 facultyInfo={allFacs[fac]} 
                                                 allPoints={released?.[fac] || finalists[fac]}
-                                                className={fac in released  ? 'allPoints' : ''}
+                                                className={fac in (released ?? {})  ? 'allPoints' : ''}
                                             />
                                         </motion.div>
                                     )
