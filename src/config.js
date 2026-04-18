@@ -1,6 +1,7 @@
 export const allFacs = {
     gimn: {
         name: "Академическая гимназия",
+        fullName: "Академическая гимназия имени Д. К. Фаддеева СПбГУ",
         color: "#ac0000",
         logo: "gimn.png",
         styles: {
@@ -9,6 +10,7 @@ export const allFacs = {
     },
     bio: {
         name: "Биология",
+        fullName: "Биологический факультет",
         color: "#68ff00",
         logo: "bio.png",
         styles: {
@@ -17,6 +19,7 @@ export const allFacs = {
     },
     vostok: {
         name: "Востоковедение",
+        fullName: "Восточный факультет",
         color: "#ff7300",
         logo: "vostok.png",
         styles: {
@@ -25,6 +28,7 @@ export const allFacs = {
     },
     media: {
         name: "ВШЖиМК",
+        fullName: "Институт \"Высшая школа журналистики и массовых коммуникаций\"",
         color: "#001aff",
         logo: "media.png",
         styles: {
@@ -33,6 +37,7 @@ export const allFacs = {
     },
     hsm: {
         name: "ВШМ",
+        fullName: "Институт \"Высшая школа менеджмента\"",
         color: "#ff0000",
         logo: "hsm.png",
         styles: {
@@ -41,6 +46,7 @@ export const allFacs = {
     },
     inoz: {
         name: "ИНоЗ",
+        fullName: "Институт наук о Земле",
         color: "#ff6600",
         logo: "inoz.png",
         styles: {
@@ -49,6 +55,7 @@ export const allFacs = {
     },
     inyaz: {
         name: "Иностранные языки",
+        fullName: "Факультет иностранных языков",
         color: "#ac0000",
         logo: "inyaz.png",
         styles: {
@@ -57,6 +64,7 @@ export const allFacs = {
     },
     irkiar: {
         name: "ИРКиАР",
+        fullName: "Институт развития конкуренции и антимонопольного регулирования",
         color: "#ac0000",
         logo: "irkiar.png",
         styles: {
@@ -65,6 +73,7 @@ export const allFacs = {
     },
     hist: {
         name: "История",
+        fullName: "Институт истории",
         color: "#ff9900",
         logo: "hist.png",
         styles: {
@@ -73,6 +82,7 @@ export const allFacs = {
     },
     arts: {
         name: "Искусства",
+        fullName: "Факультет искусств",
         color: "#f700ff",
         logo: "arts.png",
         styles: {
@@ -81,6 +91,7 @@ export const allFacs = {
     },
     kio: {
         name: "КИО",
+        fullName: "Клуб иностранных обучающихся",
         color: "#ff0059",
         logo: "kio.png",
         styles: {
@@ -89,6 +100,7 @@ export const allFacs = {
     },
     college: {
         name: "КФКиСЭТ",
+        fullName: "Колледж физической культуры и спорта, экономики и технологии",
         color: "#ac0000",
         logo: "college.png",
         styles: {
@@ -97,6 +109,7 @@ export const allFacs = {
     },
     mm: {
         name: "МатМех",
+        fullName: "Математико-механический факультет",
         color: "#4c00ff",
         logo: "mm.png",
         styles: {
@@ -105,6 +118,7 @@ export const allFacs = {
     },
     med: {
         name: "Медицина",
+        fullName: "Медицинский институт",
         color: "#6200ff",
         logo: "med.png",
         styles: {
@@ -113,6 +127,7 @@ export const allFacs = {
     },
     mkn: {
         name: "МКН",
+        fullName: "Факультет математики и компьютерных наук",
         color: "#2172be",
         logo: "mkn.png",
         styles: {
@@ -121,6 +136,7 @@ export const allFacs = {
     },
     pmpu: {
         name: "ПМ-ПУ",
+        fullName: "Факультет прикладной математики — процессов управления",
         color: "#00aaff",
         logo: "pmpu.png",
         styles: {
@@ -129,6 +145,7 @@ export const allFacs = {
     },
     politfuck: {
         name: "Политология",
+        fullName: "Факультет политологии",
         color: "#07a3ec",
         logo: "politfuck.png",
         styles: {
@@ -137,6 +154,7 @@ export const allFacs = {
     },
     psych: {
         name: "Психология",
+        fullName: "Факультет психологии",
         color: "#5900ff",
         logo: "psych.png",
         styles: {
@@ -145,6 +163,7 @@ export const allFacs = {
     },
     libarts: {
         name: "Свободные искусства",
+        fullName: "Факультет свободных искусств и наук",
         color: "#0bc430",
         logo: "libarts.png",
         styles: {
@@ -153,22 +172,16 @@ export const allFacs = {
     },
     soc: {
         name: "Социология",
+        fullName: "Факультет социологии",
         color: "#00ffe1",
         logo: "soc.png",
         styles: {
             'background': 'linear-gradient(76deg, rgb(0, 213, 255) 0%, rgb(255, 125, 197) 100%)'
         }
     },
-    stomat: {
-        name: "Стоматология",
-        color: "#0048ff",
-        logo: "stomat.png",
-        styles: {
-            'background': 'linear-gradient(76deg, rgb(0, 18, 152) 0%, rgb(0, 142, 227) 46%, rgb(36, 243, 255) 100%)'
-        }
-    },
     studs: {
         name: "Студенческие отряды",
+        fullName: "Студенческие отряды",
         color: "#ac0000",
         logo: "studs.png",
         styles: {
@@ -177,6 +190,7 @@ export const allFacs = {
     },
     teo: {
         name: "Теология",
+        fullName: "Институт теологии",
         color: "#2bc8c8",
         logo: "teo.png",
         styles: {
@@ -185,6 +199,7 @@ export const allFacs = {
     },
     sport: {
         name: "Физкультура",
+        fullName: "Общеуниверситетская кафедра физической культуры и спорта",
         color: "#ac0000",
         logo: "sport.png",
         styles: {
@@ -193,6 +208,7 @@ export const allFacs = {
     },
     phys: {
         name: "Физика",
+        fullName: "Физический факультет",
         color: "#ee5700",
         logo: "phys.png",
         styles: {
@@ -201,6 +217,7 @@ export const allFacs = {
     },
     philolog: {
         name: "Филология",
+        fullName: "Филологический факультет",
         color: "#319c55",
         logo: "philolog.png",
         styles: {
@@ -209,6 +226,7 @@ export const allFacs = {
     },
     philos: {
         name: "Философия",
+        fullName: "Институт философии",
         color: "#ffaa00",
         logo: "philos.png",
         styles: {
@@ -217,6 +235,7 @@ export const allFacs = {
     },
     fmo: {
         name: "ФМО",
+        fullName: "Факультет международных отношений",
         color: "#9559ef",
         logo: "fmo.png",
         styles: {
@@ -225,6 +244,7 @@ export const allFacs = {
     },
     chem: {
         name: "Химия",
+        fullName: "Институт химии",
         color: "#ac0000",
         logo: "chem.png",
         styles: {
@@ -233,6 +253,7 @@ export const allFacs = {
     },
     econ: {
         name: "Экономика",
+        fullName: "Экономический факультет",
         color: "#20135a",
         logo: "econ.png",
         styles: {
@@ -241,6 +262,7 @@ export const allFacs = {
     },
     law: {
         name: "Юриспруденция",
+        fullName: "Юридический факультет",
         color: "#4c00ac",
         logo: "law.png",
         styles: {
@@ -248,7 +270,3 @@ export const allFacs = {
         }
     }
 }
-
-export const back = `http://localhost:5001`
-export const backFinal = `http://localhost:8000`
-export const socketUrl = `ws://localhost:3003/ws`

@@ -1,7 +1,7 @@
 import '../scss/mainPage.scss';
 import {allFacs} from "../config";
 import {motion} from 'framer-motion'
-import {useEffect, useLayoutEffect, useState} from "react";;
+import {useEffect, useLayoutEffect, useRef, useState} from "react";;
 import Faculty from '../components/Faculty';
 import { getData, getRelease, useCustomWebSocket } from '../services/api';
 import ProgressBar from '../components/ProgressBar';
@@ -18,6 +18,7 @@ export default function FinalJudge() {
     const [curAddedPoints, setCurAddedPoints] = useState({points: {}});
     const [pointsAnimation, setPointsAnimation] = useState('');
     
+    const video = useRef(null);
     const lastJsonMessage = useCustomWebSocket();
 
     useEffect(() => {
@@ -83,8 +84,21 @@ export default function FinalJudge() {
 
     }, [curAddedPoints]);
 
+    useLayoutEffect(() => {
+        if (!video) {
+            return;
+        }
+
+        const { top, left, width, height } = video.current.getBoundingClientRect();
+        const background = document.querySelector('.videoMask');
+
+        background.style.maskSize = `${width}px ${height}px, cover`;
+        background.style.maskPosition = `${left}px ${top}px, center`;
+    }, [video])
+
     return (
             <div className="App">
+                <div className='videoMask'></div>
                 <div className="thinSide">
                     <div className="logo"/>
                     <div className="FacultyPointList">
@@ -104,17 +118,21 @@ export default function FinalJudge() {
                     
                 </div>
                 <div className="thinSide">
-                    <div className="video">{curAddedPoints.name}</div>
-                    {/* <video 
-                        className='video'
-                        src="/video.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        controls
-                        playsinline
-                    >
-                    </video> */}
+                    <div className="videoContainer">
+                        <div className='video' ref={video}></div>
+                        {/* <video 
+                            className='video'
+                            //src="/video.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            //controls
+                            playsinline
+                        >
+                        </video> */}
+                        <div className='fullName'>{allFacs[curAddedPoints.name]?.fullName || 'Full name of shown faculty'}</div>
+                    </div>
+                    
                     <ProgressBar label={`Проголосовало факультетов ${releasedLength} из ${queueLength}`}
                     curProgress={releasedLength / (queueLength || 1) * 100 || 0}/>
                     <div className='pointsLine'>

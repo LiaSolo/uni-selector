@@ -8,11 +8,31 @@
   padding: 64px 0;
   box-sizing: border-box;
   
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(/assets/video-background.png);
   overflow: hidden;
+//   background-size: cover;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//     background-image: url('/assets/Very important image.jpg');
+//    position: absolute;
+//    z-index: -2;
+}
+
+.videoMask {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(/assets/video-background.png);
+    
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    mask-image: 
+      url(/assets/mask-3.png),
+      linear-gradient(white 0 0);
+    mask-composite: exclude;
+    mask-repeat: no-repeat;
+    
 }
 
 h1 {
@@ -52,7 +72,7 @@ h1 {
     width: 820px;
 }
 
-.winnersList, .FacultyPointList {
+.winnersList {
     @include baseColumn;
     flex-wrap: wrap;
     gap: 16px;
@@ -61,18 +81,19 @@ h1 {
   
 }
 
-// .FacultyPointList {
-//     display: grid;
-//     column-count: 2;
-//     //grid-template-rows: repeat(7, 1fr);
-//     gap: 16px;
-//     //grid-auto-flow: column;
-//     //max-height: 60vh; //50vh
-// }
+.FacultyPointList {
+    display: grid;
+    column-count: 2;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 16px;
+    grid-auto-flow: column;
+    //max-height: 60vh; //50vh
+    //background-color: pink;
+}
 
 .pointsLine {
     //font-size: 60px;
-    font-size: 2em;
+    font-size: 2.75em;
     color: white;
     display: flex;
     width: 100%;
@@ -142,34 +163,37 @@ h1 {
     }
 }
 
-.video {
-    background-color: pink;
 
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 20px;
-    font-size: 60px;
+.videoContainer {
+    //border: 1px solid violet;
+    //background-color: rgba(0, 0, 0, .5);
+    width: 100%;//80%;
+    border-radius: 80px;
+    overflow: hidden;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    line-height: 1;
+
+    // mask-image: url(/assets/mask.png);
+    // mask-size: 800px;
+    // mask-repeat: no-repeat;
 }
 
-// .video {
-//     mask-image: 
-//         linear-gradient(black, black),  // весь слой
-//         // форма вашего .video блока
-//         radial-gradient(black, black);  // вырез
-    
-//     mask-size: 
-//         100% 100%,
-//         // размер вашего блока
-//         800px calc(800px * 9 / 16);
-    
-//     // mask-position: 
-//     //     0 0,
-//     //     center center; // позиция выреза
-    
-//     mask-repeat: no-repeat;
-//     mask-composite: exclude; // 👈 вырезаем второй слой из первого
-// }
+.fullName {
+    padding: 16px 0;
+    background-color: rgba(30, 15, 248, 0.5);
+}
 
+.video {
+    width: 100%;
+    //background-color: pink;
+    aspect-ratio: 16 / 9;    
+
+    // mask-image: url(/assets/mask.png);
+    // mask-size: 800px;
+    // mask-repeat: no-repeat;
+}
 
 .logo {
     background-image: url(/assets/Logo.png);
@@ -177,7 +201,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: center;
 
-    width: 80%;
+    width: 60%;
     aspect-ratio: 16 / 9;
     margin: auto 0;
     //background-color: pink;

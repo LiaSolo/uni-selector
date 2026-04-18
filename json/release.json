@@ -625,6 +625,64 @@
       }
     }
   ],
-  "released": [],
+  "released": [
+    {
+      "name": "law",
+      "points": {
+        "vostok": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "media": {
+          "curAdded": 6,
+          "total": 6
+        },
+        "kio": {
+          "curAdded": 1,
+          "total": 1
+        },
+        "mkn": {
+          "curAdded": 2,
+          "total": 2
+        },
+        "politfuck": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "psych": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "libarts": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "teo": {
+          "curAdded": 5,
+          "total": 5
+        },
+        "philolog": {
+          "curAdded": 4,
+          "total": 4
+        },
+        "philos": {
+          "curAdded": 0,
+          "total": 0
+        },
+        "fmo": {
+          "curAdded": 8,
+          "total": 8
+        },
+        "econ": {
+          "curAdded": 3,
+          "total": 3
+        },
+        "law": {
+          "curAdded": 0,
+          "total": 0
+        }
+      }
+    }
+  ],
   "round": 3
 }
