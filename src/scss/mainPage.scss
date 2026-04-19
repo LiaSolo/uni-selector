@@ -9,12 +9,13 @@
   box-sizing: border-box;
   
   overflow: hidden;
-//   background-size: cover;
-//   background-position: center;
-//   background-repeat: no-repeat;
-//     background-image: url('/assets/Very important image.jpg');
-//    position: absolute;
-//    z-index: -2;
+}
+
+.background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(/assets/video-background.png);
 }
 
 .videoMask {

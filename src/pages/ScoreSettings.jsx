@@ -272,8 +272,9 @@ export default function ScoreSettings() {
                     </tr> 
                 </thead>
                 <tbody ref={rowsRef} className='mainContent'>
-                    {facOrder.map((herald) => (
-                        (!isHideCheckbox || judges[herald].isVoited) && <TableRow
+                    {facOrder.map((herald) => {
+                        //console.log(herald, allFacs[herald])
+                        return (!isHideCheckbox || judges[herald].isVoited) && <TableRow
                             key={herald}
                             id={herald}
                             rowName={allFacs[herald].name}
@@ -284,7 +285,7 @@ export default function ScoreSettings() {
                             activeColumn={activeColumn}
                             setActiveColumn={setActiveColumn}
                         />
-                    ))}
+                        })}
                 </tbody>
                 <tfoot>
                      <tr className='total'>

@@ -130,7 +130,7 @@ export default function FinalJudge() {
                             playsinline
                         >
                         </video> */}
-                        <div className='fullName'>{allFacs[curAddedPoints.name]?.fullName || 'Full name of shown faculty'}</div>
+                        {curAddedPoints.name && <div className='fullName'>{allFacs[curAddedPoints.name]?.fullName || 'SPbU'}</div>}
                     </div>
                     
                     <ProgressBar label={`Проголосовало факультетов ${releasedLength} из ${queueLength}`}

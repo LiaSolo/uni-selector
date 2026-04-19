@@ -179,6 +179,15 @@ export const allFacs = {
             'background': 'linear-gradient(76deg, rgb(0, 213, 255) 0%, rgb(255, 125, 197) 100%)'
         }
     },
+    stomat: {
+        name: "Стоматология",
+        fullName: "Факультет стоматологии",
+        color: "#0048ff",
+        logo: "stomat.png",
+        styles: {
+            'background': 'linear-gradient(76deg, rgb(0, 18, 152) 0%, rgb(0, 142, 227) 46%, rgb(36, 243, 255) 100%)'
+        }
+    },
     studs: {
         name: "Студенческие отряды",
         fullName: "Студенческие отряды",
