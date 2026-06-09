@@ -590,18 +590,18 @@
     "law": 129
   },
   "audience": {
-    "vostok": 0,
-    "media": 0,
-    "kio": 0,
-    "mkn": 0,
-    "politfuck": 0,
-    "psych": 0,
-    "libarts": 0,
-    "teo": 0,
-    "philolog": 0,
-    "philos": 0,
-    "fmo": 0,
-    "econ": 0,
-    "law": 0
+    "vostok": 148,
+    "media": 186,
+    "kio": 146,
+    "mkn": 15,
+    "politfuck": 29,
+    "psych": 88,
+    "libarts": 9,
+    "teo": 54,
+    "philolog": 67,
+    "philos": 49,
+    "fmo": 64,
+    "econ": 44,
+    "law": 117
   }
 }

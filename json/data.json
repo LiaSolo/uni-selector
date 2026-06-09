@@ -1,18 +1,18 @@
 {
-  "parts": [
-    "vostok",
-    "media",
-    "kio",
-    "mkn",
-    "politfuck",
-    "psych",
-    "libarts",
-    "teo",
-    "philolog",
-    "philos",
-    "fmo",
-    "econ",
-    "law"
-  ],
-  "round": 3
+  "parts": {
+    "vostok": 128,
+    "media": 157,
+    "kio": 56,
+    "mkn": 31,
+    "politfuck": 28,
+    "psych": 0,
+    "libarts": 34,
+    "teo": 151,
+    "philolog": 117,
+    "philos": 48,
+    "fmo": 71,
+    "econ": 64,
+    "law": 129
+  },
+  "round": 4
 }
