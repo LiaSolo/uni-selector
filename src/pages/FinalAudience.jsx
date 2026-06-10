@@ -7,11 +7,6 @@ import { getData, getRelease, useCustomWebSocket } from '../services/api';
 import cn from 'classnames';
 
 const releaseFormatter = (rawReleased) => {
-    // const newReleased = Object.assign({}, ...rawReleased);
-    // Object.keys(newReleased).forEach(fac => {
-    //     newReleased[fac] = newReleased[fac].total;
-    // });
-
     const newReleased = {}
     rawReleased.forEach((fac) => {
         newReleased[fac.name] = fac.total;
@@ -42,7 +37,6 @@ export default function Final() {
     }, [])
 
     useLayoutEffect(() => {
-    //console.log(released)
         if (!finalists || !released) {
             return;
         }
@@ -74,14 +68,12 @@ export default function Final() {
     }, [lastJsonMessage]);
 
     return (
-            <div className="App">
+            <div className="App background">
                 <div className="largeSide">
                     <div className="FacultyPointList">
                         {
                             finsOrdered.map((fac) =>
                                 {
-                                    //const isReleased = released?.[fac] ?? 0;
-                                    //console.log(fac, isReleased, released, released[fac])
                                     return (
                                         <motion.div layout key={fac} transition={{ duration: 1 }}>
                                             <Faculty 

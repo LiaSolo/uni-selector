@@ -75,11 +75,7 @@ h1 {
 
 .winnersList {
     @include baseColumn;
-    flex-wrap: wrap;
     gap: 16px;
-
-    max-height: 45vh; //50vh
-  
 }
 
 .FacultyPointList {
@@ -136,7 +132,6 @@ h1 {
 }
 
 .point.highScore::before {
-    //background-color: rgb(253, 40, 210);
     background: linear-gradient(135deg, rgb(216, 13, 159) 0%, rgb(239, 175, 244) 100%);
 }
 
@@ -166,8 +161,6 @@ h1 {
 
 
 .videoContainer {
-    //border: 1px solid violet;
-    //background-color: rgba(0, 0, 0, .5);
     width: 100%;//80%;
     border-radius: 80px;
     overflow: hidden;
@@ -175,10 +168,6 @@ h1 {
     color: white;
     text-align: center;
     line-height: 1;
-
-    // mask-image: url(/assets/mask.png);
-    // mask-size: 800px;
-    // mask-repeat: no-repeat;
 }
 
 .fullName {
@@ -188,12 +177,7 @@ h1 {
 
 .video {
     width: 100%;
-    //background-color: pink;
     aspect-ratio: 16 / 9;    
-
-    // mask-image: url(/assets/mask.png);
-    // mask-size: 800px;
-    // mask-repeat: no-repeat;
 }
 
 .logo {
@@ -205,7 +189,6 @@ h1 {
     width: 60%;
     aspect-ratio: 16 / 9;
     margin: auto 0;
-    //background-color: pink;
 }
 
 .addedPointsContainer {

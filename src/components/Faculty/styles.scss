@@ -8,19 +8,24 @@
     //max-height: 80px;
     border-radius: 16px;
     width: fit-content;
+    min-width: 260px;
 
     font-size: $normal;
     line-height: 1;    
     color: rgb(79, 9, 136);
     
-    transition: .5s linear all;    
     background: rgba(242, 219, 255, 0.8);    
     flex-shrink: 0;
-    transition: margin 1s;
+    
 }
 
 .lowOpacity {
     opacity: 0.5;
+    transition: opacity 1s;
+}
+
+.winnerReleased {
+    animation: winnerReleasing 2s forwards;
 }
 
 .facultyName {
@@ -33,13 +38,8 @@
     //height: 66px;
     //height: 80px;
     height: 2.5em;
-    //width: 340px;
-    //width: 200px;
 
     font-family: 'Avenir-Demi';
-    //font-size: $medium;
-    //font-size: 32px;
-    //font-size: 1.5em;
     font-size: 24px;
     color: rgb(79, 9, 136);
     background: rgb(242, 219, 255);
@@ -53,8 +53,14 @@
     background: rgb(227, 194, 247);
 }
 
-.released {
+.mainContent .faculty {
+    margin-right: auto;
+    transition: margin linear 1s;
+}
+
+.mainContent .faculty.released {
     background: rgba(227, 194, 247, 1);
+    margin-right: 0;
     margin-left: auto;
 }
 
@@ -107,5 +113,14 @@ img {
     }
     to {
         opacity: 0;
+    }
+}
+
+@keyframes winnerReleasing {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
     }
 }

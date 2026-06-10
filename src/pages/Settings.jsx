@@ -17,8 +17,6 @@ Object.keys(allFacs).forEach((fac) =>
         semi: 1,
         isFinal: false,
         isParticipant: true,
-        scoreJudge: 0,
-        scoreAudience: 0,
     }
 );
 
@@ -151,21 +149,26 @@ export default function Settings() {
                 <span>кто win в прш году?</span>
                 <span>какой полуфинал?</span>
                 <span>прошел в финал?</span>
-                <span>баллы финала</span>
             </div>
             <div className='mainContent' ref={containerRef}>
-               {facOrder.map((key) => 
-                   (!isHideCheckbox || facSettings[key].isParticipant) &&
-                    <FacultySettings
-                            id={key}
-                            key={key} 
-                            name={allFacs[key].name} 
-                            isLastWinner={lastWinner === key}
-                            setLastWinner={() => updateLastWinner(key)}
-                            showOption={selectedRound}
-                            serverData={facSettings[key]}
-                            serverUpdate={(newData) => updateOneFacOneSetting(key, newData)} 
-                        />
+               {facOrder.map((key) => {
+                //TODO: clear non-part info
+                    const isDisplay = (!selectedRound // show all
+                        || (lastWinner !== key && selectedRound === facSettings[key].semi && facSettings[key].isParticipant) // if semi: not last winner + this semi + part
+                        || (selectedRound === 3 && facSettings[key].isFinal && facSettings[key].isParticipant) // if final + part
+                    )
+                    return (!isHideCheckbox || facSettings[key].isParticipant) && isDisplay &&
+                        <FacultySettings
+                                id={key}
+                                key={key} 
+                                name={allFacs[key].name} 
+                                isLastWinner={lastWinner === key}
+                                setLastWinner={() => updateLastWinner(key)}
+                                showOption={selectedRound}
+                                serverData={facSettings[key]}
+                                serverUpdate={(newData) => updateOneFacOneSetting(key, newData)} 
+                            />
+                    }
                 )} 
             </div>
             
@@ -173,7 +176,10 @@ export default function Settings() {
             <div className='footer'>
                 <Button type={'primary'} onClick={handleSave}>Сохранить</Button>
                 
-                <Button type={'secondary'} onClick={handleReset}>Сбросить всё на#уй</Button>
+                <Button type={'secondary'} onClick={handleReset}>Сбросить всё</Button>
+                <Link to="score">
+                    <Button type={'pickme'}>К баллам</Button>
+                </Link>
                 <Link to="release">
                     <Button type={'dangerous'}>К релизу</Button>
                 </Link>

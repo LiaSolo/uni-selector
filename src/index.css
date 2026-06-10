@@ -1,11 +1,12 @@
 :root {
+  /* display: flex;
+  place-items: center; */
+
   font-family: 'Avenir-Medium';
   line-height: 1.5;
-
-  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  /*background-color: #242424;*/
-
+  color-scheme: dark;
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,11 +15,34 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* display: flex;
+  place-items: center; */
   width: 100vw;
   height: 100vh;
 }
+
+input[type=checkbox] {
+    cursor: pointer;
+}
+
+input[type=checkbox]:disabled {
+    cursor: not-allowed;
+}
+
+/* Убираем стрелки у всех number input */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield;
+
+    padding: 4px 8px;
+    width: 50px;
+}
+
 
 
 /* button:focus,

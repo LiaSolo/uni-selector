@@ -1,0 +1,137 @@
+table {
+    @include columnFlex;
+    //display: table;;
+
+    width: calc(15px + $baseContentWidth);
+    margin-right: -15px ;
+    //width: $baseContentWidth;
+    // margin-right: 0px;
+    // padding-right: 20px;
+
+    height: 100%;
+    //height: 500px;
+    flex: 1;
+    overflow-y: visible;
+    overflow-x: hidden;
+    gap: 0;
+    background-color: transparent;  
+    border-collapse: collapse;
+
+    
+}
+
+thead, tfoot {
+    position: sticky;
+    background-color: $blue;
+    color: white;
+    width: $baseContentWidth;
+}
+
+
+thead {
+    top: 0;
+}
+
+tfoot {
+    bottom: 0;
+}
+
+tbody.mainContent {
+  gap: 0;
+
+  //background: white;
+  //width: $baseContentWidth;
+  height: 100%;
+  overflow-y: scroll;
+  //overflow-y: scroll;
+  margin-right: 0px;
+  padding-right: 0px;
+  width: calc($baseContentWidth + 15px);
+  background-color: white;
+  //overflow-x: visible;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  text-align: center;
+  flex: 1;
+  //flex-shrink: 0;
+  box-sizing: border-box;
+  //width: 40px;
+}
+
+
+td {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+tr {
+    display: flex;
+}
+
+tbody tr:hover,
+th.activeColumn,
+td.activeColumn  {
+    background-color: rgba($color: $light-pink, $alpha: 0.3);
+}
+
+.rotatedHeader {
+    height: 120px;
+    padding: 4px;
+
+    writing-mode: sideways-lr;
+    line-height: 1;
+    display: flex;
+}
+
+.headerText {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: left;
+}
+
+input[type=number] {
+    background: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    color: $light-gray;
+    font-family: 'Avenir-Bold';
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+}
+
+td input:disabled {
+    background-color: $light-gray;
+    color: transparent;
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+th.firstColumn, td.firstColumn {
+    flex: 0 0 auto;
+    width: 120px;
+    padding: 2px;
+    vertical-align: baseline;
+    min-height: 25px;
+}
+
+tr.total {
+    background-color: $light-pink;
+    color: white;
+}
+
+.total input {
+    color: white !important;
+}
+
+.total input::placeholder {
+    color: white;
+}
+

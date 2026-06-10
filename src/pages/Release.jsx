@@ -5,7 +5,7 @@ import {motion} from 'framer-motion'
 import RadioButton from '../components/radioButton';
 import Button from '../components/Button';
 import { allFacs } from '../config';
-import { getData, getJudges, getRelease, getSettings, saveData, saveRelease } from '../services/api';
+import { getData, getScore, getRelease, getSettings, saveData, saveRelease } from '../services/api';
 import { settingsFormatter } from '../services/settingsFormatter';
 import Faculty from '../components/Faculty';
 import cn from 'classnames';
@@ -35,7 +35,6 @@ export default function Release() {
 
     const setDataAndQueue = useCallback(async (rawSettings) => {
         const {queue, ...data} = settingsFormatter(rawSettings, selectedRound);
-        console.log(queue)
         setQueue(queue);
         setReleased([]);
 
@@ -56,7 +55,7 @@ export default function Release() {
         }
 
         if (selectedRound >= 3) {
-            getJudges(setDataAndQueue);
+            getScore(setDataAndQueue);
             return;
         }
         
@@ -84,16 +83,12 @@ export default function Release() {
 
 
     const handleNext = async () => {
-        console.log(queue)
         if (released.length < queue.length) {
             const curReleased = structuredClone(queue[released.length]);
             
             if (selectedRound === 3) {
                 const prevReleased = released.at(-1);
                 const prevPoints = prevReleased?.points ?? {};
-
-                console.log('prevReleased', prevReleased)
-                console.log('curReleased', curReleased)
 
                 Object.entries(curReleased.points).forEach(([fin, points]) => {
                     curReleased.points[fin] = {
@@ -167,10 +162,7 @@ export default function Release() {
         const filteredQueue = queue.filter(fac => fac !== clickedFac);
         const newReleased = released.concat([clickedFac]);
         const newQueue = newReleased.concat(filteredQueue.slice(released.length));
-        console.log('newQueue', newQueue)
         setQueue(newQueue);
-
-        //await handleNext();
 
         setReleased(newReleased);
 

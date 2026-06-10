@@ -7,18 +7,28 @@ import { useCustomWebSocket, getData, getRelease } from '../services/api';
 export default function SemiFinal() {
     const [released, setReleased] = useState([]);
     const [parts, setParts] = useState([]);
+    const [queue, setQueue] = useState([]);
+    const [finsCount, setFinsCount] = useState(0);
 
     useEffect(() => {
         getData((data) => {
             setParts(data.parts)});
 
         getRelease((data) => {
-            setReleased([
-                ...data.released, 
-                ...Array(data.queue.length - data.released.length).fill(null)
-            ]);
+            setFinsCount(data.queue.length);
+            setReleased(data.released);
         });
     }, []);
+
+    useEffect(() => {
+        console.log(finsCount, released.length)
+        setQueue([
+            ...released,
+            ...Array(finsCount - released.length || 0).fill(null)
+        ]);
+    }, [finsCount, released]);
+
+    useEffect(() => console.log(queue), [queue])
 
     const lastJsonMessage = useCustomWebSocket();
 
@@ -31,8 +41,8 @@ export default function SemiFinal() {
 
 
     return (
-            <div className="App">
-                <div className="right">
+            <div className="App background">
+                <div className="largeSide">
                     <div className="logo"/>
                     <div className="FacultyList">
                         {
@@ -46,20 +56,23 @@ export default function SemiFinal() {
                         }
                     </div>
                 </div>
-                <div className="winnersList">
-                    <h1>Финалисты</h1>
-                    {
-                        released.map((fac, index) => {
-                            return (
-                                <Faculty 
-                                    key={index} 
-                                    className={fac ? "winnerReleased" : "lowOpacity"} 
-                                    facultyInfo={fac && allFacs[fac]}
-                                />
-                            )
-                        })
-                    }
+                
+                    <div className="winnersList">
+                        <h1>Финалисты</h1>
+                        {
+                            queue.map((fac, index) => {
+                                return (
+                                    <Faculty 
+                                        key={index} 
+                                        className={fac ? "winnerReleased" : "lowOpacity"} 
+                                        //className={"lowOpacity"} 
+                                        facultyInfo={fac && allFacs[fac]}
+                                    />
+                                )
+                            })
+                        }
                 </div>
+                
             </div>
 
 

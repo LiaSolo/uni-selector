@@ -2,8 +2,13 @@
 
 .row {
     display: grid;
-    grid-template-columns: 60px 200px 60px 90px 60px 50px 50px;
-    gap: 8px;
+    grid-template-columns: 60px 200px 60px 90px 60px;
+    gap: 16px;
+}
+
+
+.row:hover {
+    background-color: rgba($color: white, $alpha: 0.1)
 }
 
 .nameContainer {
@@ -11,12 +16,6 @@
     width: 200px;
     padding: 4px 0;
     cursor: grab;
-}
-
-/* Для Sortable */
-.sortable-chosen, .sortable-ghost {
-    cursor: grabbing !important;
-    cursor: -webkit-grabbing !important;
 }
 
 
@@ -33,27 +32,9 @@
     width: 60px;
     margin: 0;
     accent-color: $light-green;
-    cursor: pointer;
-}
-
-.row input[type=checkbox]:disabled {
-    cursor: not-allowed;
-}
-
-/* Убираем стрелки у всех number input */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-}
-
-input[type=number] {
-    -moz-appearance: textfield; /* Firefox */
-    appearance: textfield;
-
-    padding: 4px 8px;
-    width: 50px;
 }
 
 .row .radioButton {
+    width: 60px;
     transform: scale(1.5);
 }

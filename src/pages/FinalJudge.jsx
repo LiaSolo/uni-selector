@@ -33,9 +33,7 @@ export default function FinalJudge() {
 
 
     useLayoutEffect(() => {
-        //console.log('lastJsonMessage', lastJsonMessage)
         if (lastJsonMessage && lastJsonMessage.type === 'data-updated') {
-            //setReleased(prev => [...prev, lastJsonMessage.data]);
             setReleased(lastJsonMessage.data);
         }
     }, [lastJsonMessage]);
@@ -51,7 +49,7 @@ export default function FinalJudge() {
         }
 
         const lastReleased = released.at(-1);
-        const isNewFaculty = (released.length % 2); // 0 => false, 1 => true
+        const isNewFaculty = (released.length % 2);
 
         if (isNewFaculty) {
             setPointsAnimation('');

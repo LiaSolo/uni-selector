@@ -42,8 +42,8 @@ export async function getData(setData) {
     await get('data', setData)
 };
 
-export async function getJudges(setData) {
-    await get('judges', setData)
+export async function getScore(setData) {
+    await get('score', setData)
 };
 
 
@@ -60,78 +60,12 @@ export async function saveRelease(newData) {
   return await save('release', newData)
 }
 
-export async function saveJudges(newData) {
-  return await save('judges', newData)
+export async function saveScore(newData) {
+  return await save('score', newData)
 }
 
-// export async function getSettings(settings, setSettings) {
-//     await fetch(SETTINGS_URL)
-//     .then(res => res.json())
-//     .then(data => setSettings({...settings, ...data}));
-// };
 
-// export async function saveSettings(data) {
-//     console.log(data)
-//     const response = await fetch(SETTINGS_URL, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-
-//     return response.json();
-// };
-
-// export async function getData(setData) {
-//   console.log(555)
-//     await fetch(DATA_URL)
-//     .then(res => res.json())
-//     .then(data => setData(data));
-// };
-
-// export async function saveData(data) {
-//     const response = await fetch(DATA_URL, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-
-//     return response.json();
-// };
-
-// export async function getData(path = 'data', setData) {
-//     await fetch(`${API_URL}${path}`)
-//     .then(res => res.json())
-//     .then(data => setData(data));
-// };
-
-// export async function saveData(path = 'data', data) {
-//     const response = await fetch(`${API_URL}${path}`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-
-//     return response.json();
-// };
-
-// export async function getRelease(setData) {
-//     await fetch(RELEASE_URL)
-//     .then(res => res.json())
-//     .then(data => setData(data));
-// };
-
-// export async function saveRelease(data) {
-//     const response = await fetch(RELEASE_URL, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(data)
-//     });
-
-//     return response.json();
-// };
-
-
-// WebSocket для realtime (дети слушают обновления)
+// WebSocket для слушания клиентскими страничками
 export class WebSocketService {
   constructor(url = 'ws://localhost:3003') {
     this.url = url;

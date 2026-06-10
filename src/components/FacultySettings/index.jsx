@@ -1,12 +1,7 @@
 import cn from 'classnames';
 import Toggle from '../Toggle';
 import './styles.scss';
-import ScoreInput from '../ScoreInput';
 import RadioButton from '../radioButton';
-
-// showOption 1 <=> curToggleOption
-// showOption 2 <=> !curToggleOption
-// showOption 3 <=> curIsFinal
 
 
 export default function FacultySettings({
@@ -14,20 +9,13 @@ export default function FacultySettings({
     name,
     isLastWinner,
     setLastWinner,
-    serverData: { semi, isFinal, isParticipant, scoreJudge, scoreAudience },
+    serverData: { semi, isFinal, isParticipant },
     serverUpdate,
-    showOption = 0,
 }
 ) { 
-    //const finalist = isLastWinner || isFinal;
-    const isDisplay = (showOption === 0 
-        || (!isLastWinner && showOption === semi && isParticipant) 
-        || (showOption === 3 && isFinal && isParticipant)
-    )
-
     return (
         
-                <div className={cn('row', !isDisplay ? 'noDisplay' : '')} data-id={id}>
+                <div className='row' data-id={id}>
                     <input 
                         type='checkbox' 
                         checked={isParticipant}
@@ -54,20 +42,6 @@ export default function FacultySettings({
                                 disabled={isLastWinner}
                                 onChange={(e) => serverUpdate({isFinal: e.target.checked})}
                             />
-                            {/* {isFinal &&
-                                <>
-                                    <ScoreInput 
-                                        label="жюри" 
-                                        curScore={scoreJudge} 
-                                        setCurScore={(newValue) => serverUpdate({scoreJudge: newValue})} 
-                                    />
-                                    <ScoreInput 
-                                        label="зрители" 
-                                        curScore={scoreAudience} 
-                                        setCurScore={(newValue) => serverUpdate({scoreAudience: newValue})}
-                                    />
-                                </>
-                            } */}
                         </> 
                     }
                 </div>

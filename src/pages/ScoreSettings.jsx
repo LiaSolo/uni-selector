@@ -1,13 +1,14 @@
 import '../scss/settingsPage.scss';
-import { useCallback, useEffect, useLayoutEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Sortable from 'sortablejs';
 import { Link } from 'react-router-dom';
 import { allFacs } from '../config';
-import { getJudges, getSettings, saveJudges } from '../services/api';
+import { getScore, getSettings, saveScore } from '../services/api';
 import Button from '../components/Button';
 import cn from 'classnames';
 import summurizeServerResponse from '../services/summurizeServerResponse';
 import TableRow from '../components/TableRow';
+import ScoreTable from '../components/ScoreTable';
 
 const initSettings = {};
 Object.keys(allFacs).forEach((fac) => 
@@ -17,28 +18,26 @@ Object.keys(allFacs).forEach((fac) =>
     }
 );
 
- const getZeroPoints = (keys) => {
-    keys.reduce((res, key) => ({
-        ...res,
-        [key]: 0,
-    }), {});
-}
+//  const getZeroPoints = (keys) => {
+//     keys.reduce((res, key) => ({
+//         ...res,
+//         [key]: 0,
+//     }), {});
+// }
 
 
 export default function ScoreSettings() {  
     const [serverMessage, setServerMessage] = useState('');
-    const [activeColumn, setActiveColumn] = useState('');
     const [isHideCheckbox, setIsHideCheckbox] = useState(false);
     const [isEnoughData, setIsEnoughData] = useState(false);
      
     const [fins, setFins] = useState([]);
     const [audience, setAudience] = useState({});
-    //const [sumJudges, setSumJudges] = useState({});
     const [judges, setJudges] = useState(initSettings);
     const [facOrder, setFacOrder] = useState(Object.keys(allFacs));
 
     const rowsRef = useRef(null);
-    const columnsRef = useRef(null);
+    //const columnsRef = useRef(null); получится ли перетаскивать столбцы с баллами?
 
 
     useEffect(() => {
@@ -48,36 +47,21 @@ export default function ScoreSettings() {
                 return;
             }
 
-            // прошлогодний победитель + финалисты пф
-            
-            // const finalists = [
-            //     rawSettings.lastWinner,
-            //     ...Object.keys(allFacs).filter(fac => rawSettings.facs[fac].isFinal),
-            // ]
-
-            //console.log(rawSettings[rawSettings.lastWinner])
-
             const finalists = Object.keys(allFacs).filter(fac => rawSettings.facs[fac].isFinal);
-
             setFins(finalists);
         });
  
     }, []);
 
     useEffect(() => {
-        //console.log(111, fins)
         if (!fins.length) {
             return;
         }
 
         
+        getScore((data) => {
 
-        getJudges((data) => {
-            // if (!data.fins) {
-            //     getSettings()
-            // }
-
-            // вынести как глобальную функцию с аргументом array
+            // вынести как глобальную функцию ??
             const zeroPoints = fins.reduce((res, fin) => ({
                 ...res,
                 [fin]: 0,
@@ -89,28 +73,12 @@ export default function ScoreSettings() {
 
             const facs = data.facs ?? {...initSettings};
 
-            //const newSettings = {...initSettings};
-
             Object.keys(initSettings).forEach(fac => {
-                //console.log(fac, newJudges[fac])
-
                 facs[fac] ??= {} // если вообще нет fac in facs
                 facs[fac].isVoited ??= true; // если нет isVoited in fac
                 facs[fac].points = {...zeroPoints, ...(facs[fac].points ?? {})} // если нет points in fac или не в полном виде
-
-                // if (fac in facs) {
-                //     facs[fac].isVoited ??= true;
-                //     facs[fac].points = {...zeroPoints, ...facs[fac].points}
-                // } else {
-                //     facs[fac] = {isVoited: true, points: zeroPoints}
-                // }
-                
-                // fins.forEach((fin) => {
-                //     newSettings[fac].points[fin] = data[fac] && data[fac].points && data[fac].points[fin] || 0;
-                // });
             });
 
-            console.log('new judjes', facs)
             setJudges(facs);
             setFacOrder(Object.keys(facs));
             setIsEnoughData(true);
@@ -119,7 +87,7 @@ export default function ScoreSettings() {
     }, [fins]);
 
     // устанавливаем порядок выступления глашатаев перетаскиванием строк
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (!rowsRef.current) return;
 
         new Sortable(rowsRef.current, {
@@ -131,37 +99,13 @@ export default function ScoreSettings() {
                 setFacOrder(newOrder);        
             },
         });
-
-        // if (!columnsRef.current) return;
-
-        // new Sortable(columnsRef.current, {
-        //     animation: 150,
-            
-        //     onEnd: () => {
-        //         const items = columnsRef.current.querySelectorAll('th.rotatedHeader');
-        //         const newOrder = Array.from(items).map(item => item.dataset.id);
-        //         setFins(newOrder);   
-        //         //console.log(newOrder)     
-        //     },
-        // });
-
-        //return () => sortable.destroy();
     }, []);    
 
-    useLayoutEffect(() => {
-        //console.log(serverMessage)
+    useEffect(() => {
         setTimeout(() => {serverMessage && setServerMessage('')}, 5000);
     }, [serverMessage]);
 
-    const updateAudienceScore = (fac, newPoints) => {
-        setAudience(prev => ({
-            ...prev,
-            [fac]: newPoints,
-        }))
-    }
-
     const updateOneFacIsVoited = (name, newIsVoited) => {
-        //console.log(name, newIsVoited)
         setJudges(prev => ({
             ...prev, 
             [name]: {
@@ -172,15 +116,6 @@ export default function ScoreSettings() {
     };
 
     const updateOneFacOnePoint = (name, setting) => {
-        // setting: {fin: points}
-        // const fin = Object.keys(setting)[0]
-        // const diffSum = setting[fin] - judges[name].points[fin]
-
-        // setSumJudges(prev => ({
-        //     ...prev,  
-        //     [fin]: prev[fin] + diffSum
-        // }));
-
         setJudges( prev => ({
             ...prev, 
             [name]: {
@@ -204,6 +139,13 @@ export default function ScoreSettings() {
         return sumPoints;
     }
 
+    const updateAudienceScore = (fac, newPoints) => {
+        setAudience(prev => ({
+            ...prev,
+            [fac]: newPoints,
+        }))
+    }
+
     const allPointsByFac = (fac) => {
         return judgeSumByFac(fac) + (audience[fac] ?? 0)
     }
@@ -219,9 +161,8 @@ export default function ScoreSettings() {
             audience: audience
         };
 
-        console.log(resultJudges)
         setServerMessage(await summurizeServerResponse(
-            saveJudges(resultJudges),
+            saveScore(resultJudges),
         ));
     }
 
@@ -237,9 +178,49 @@ export default function ScoreSettings() {
         setIsHideCheckbox(false);
 
         setServerMessage(await summurizeServerResponse(
-            saveJudges({}),
+            saveScore({}),
         ));
     }
+
+    const tableFooterData = [
+        ['Итого за жюри', fins.reduce((res, fin) => {
+            return {
+                ...res, 
+                [fin]: judgeSumByFac(fin)
+            }}, 
+            {})
+        ], 
+        ['Зрительские', fins.reduce((res, fin) => {
+            return {
+                ...res, 
+                [fin]: <input 
+                    type='number'
+                    placeholder='0'
+                    disabled={false}
+                    value={audience[fin]  || ''}
+                    onChange={(e) => updateAudienceScore(fin, Number(e.target.value))}
+                />
+            }}, 
+            {})
+        ], 
+        ['Итоговый итог', fins.reduce((res, fin) => {
+            return {
+                ...res, 
+                [fin]: allPointsByFac(fin)
+            }}, 
+            {})
+        ], 
+    ];
+
+    // const rowsData = isHideCheckbox 
+    // ? facOrder.reduce((res, fac) => {
+    //     console.log(res)
+    //     if (judges[fac].isVoited) {
+    //         res[fac] = judges[fac]
+    //     }
+    //     return res;
+    // }, {})
+    // : judges;
 
     return (
         <div className='settingsPage'>
@@ -254,68 +235,18 @@ export default function ScoreSettings() {
                     </label>
 
             </div>
-            <table>
-                <thead>
-                    <tr ref={columnsRef}>
-                        <th className='firstColumn'></th>
-                        {fins.map((fin) => (
-                            <th 
-                                data-id={fin}
-                                key={fin} 
-                                className={cn('rotatedHeader', activeColumn === fin && 'activeColumn')}
-                                onMouseEnter={() => setActiveColumn(fin)}
-                                onMouseLeave={() => setActiveColumn(null)}
-                            >
-                                <div className='headerText'>{allFacs[fin].name}</div>
-                            </th>
-                        ))}
-                    </tr> 
-                </thead>
-                <tbody ref={rowsRef} className='mainContent'>
-                    {facOrder.map((herald) => {
-                        //console.log(herald, allFacs[herald])
-                        return (!isHideCheckbox || judges[herald].isVoited) && <TableRow
-                            key={herald}
-                            id={herald}
-                            rowName={allFacs[herald].name}
-                            isActive={judges[herald].isVoited}
-                            onChangeActive={(newValue) => updateOneFacIsVoited(herald, {isVoited: newValue})}
-                            rowData={judges[herald].points}
-                            onChangeCell={(newSetting) => updateOneFacOnePoint(herald, newSetting)}
-                            activeColumn={activeColumn}
-                            setActiveColumn={setActiveColumn}
-                        />
-                        })}
-                </tbody>
-                <tfoot>
-                     <tr className='total'>
-                        <td className='firstColumn'>Итого за жюри</td>
-                        {fins.map((fin) => (
-                            <td key={fin}>{judgeSumByFac(fin)}</td>
-                        ))}
-                    </tr> 
-                     <tr className='total'>
-                        <td className='firstColumn'>Зрительские</td>
-                        {fins.map((fin) => (
-                            <td key={fin}>
-                                <input 
-                                    type='number'
-                                    placeholder='0'
-                                    disabled={false}
-                                    value={audience[fin]  || ''}
-                                    onChange={(e) => updateAudienceScore(fin, Number(e.target.value))}
-                                />
-                            </td>
-                        ))}
-                    </tr> 
-                     <tr className='total'>
-                        <td className='firstColumn'>Итоговый итог</td>
-                        {fins.map((fin) => (
-                            <td key={fin}>{allPointsByFac(fin)}</td>
-                        ))}
-                    </tr> 
-                </tfoot>
-            </table>
+
+            <ScoreTable 
+                headerData={fins} // TODO: добавить отображаемые названия
+                rowsOrder={facOrder}
+                setRowsOrder={setFacOrder}
+                bodyRef={rowsRef}
+                hideNonActiveRows={isHideCheckbox}
+                rowsData={judges} // TODO: добавить отображаемые названия + синхронизировать с rowsOrder на показ неголосующих
+                onChangeActive={(rowName, newValue) => updateOneFacIsVoited(rowName, {isVoited: newValue})}
+                onChangeCell={(rowName, newSetting) => updateOneFacOnePoint(rowName, newSetting)}
+                footerData={tableFooterData}
+            />
             
 
             <div className='footer'>
@@ -323,7 +254,7 @@ export default function ScoreSettings() {
                 <Link to="/settings">
                     <Button type={'primary__light'}>К настройкам</Button>
                 </Link>
-                <Button type={'secondary'} onClick={handleReset}>Сбросить всё на#уй</Button>
+                <Button type={'secondary'} onClick={handleReset}>Сбросить всё</Button>
                 
                 <Link to="/settings/release">
                     <Button type={'dangerous'}>К релизу</Button>

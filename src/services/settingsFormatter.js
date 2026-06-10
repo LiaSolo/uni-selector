@@ -10,8 +10,6 @@
 // }
 
 export const settingsFormatter = (rawSettings, round) => {
-    // избавиться от lastWinner в настройках
-    // вместо этого добавить semi = 0 ? null ?
     const {facs: facSettings, lastWinner} = rawSettings;
 
     if (!round || !facSettings) {
@@ -22,18 +20,15 @@ export const settingsFormatter = (rawSettings, round) => {
         });
     }
 
-    //let parts = [], fins = [];
 
     // semi
     if (round < 3) {
-
         const parts = Object.keys(facSettings).filter((fac) => 
             facSettings[fac].isParticipant 
             && lastWinner !== fac 
-            && round === facSettings[fac].sem
+            && round === facSettings[fac].semi
         );
         
-        //parts = parts.filter((fac) => round === facSettings[fac].semi);
         const fins = parts.filter(fac => facSettings[fac].isFinal)
         //shuffleArray(queue)
 
@@ -48,28 +43,11 @@ export const settingsFormatter = (rawSettings, round) => {
 
     // final judges
     if (round === 3) {
-        //fins.push(lastWinner);
-        //console.log(rawSettings)
-
-        // if (!rawSettings.facs) {
-        //     return;
-        // }
-
-        console.log(rawSettings)
 
         const parts = rawSettings.fins ?? [];
         const queue = Object.keys(facSettings)
             .filter(fac => facSettings[fac].isVoited)
             .flatMap((fac) => {
-
-
-                // const first = Object.fromEntries(
-                //     Object.entries(facSettings[fac].points).filter(([, value]) => value < 10)
-                // );
-
-                // const second = Object.fromEntries(
-                //     Object.entries(facSettings[fac].points).filter(([, value]) => value === 10)
-                // );
 
                 const first = {}, second = {};
 
@@ -80,8 +58,6 @@ export const settingsFormatter = (rawSettings, round) => {
                     if (score === 10) {
                         second[fin] = score;
                     }
-
-                    //second[fin] = score === 10 ? 10 : 0;
                 })
 
                 return ([
@@ -89,7 +65,6 @@ export const settingsFormatter = (rawSettings, round) => {
                     {name: fac, points: second},
                 ])
             })
-            //.map((fac) => ({name: fac, ...facSettings[fac]}))
 
         return ({
             parts: parts,
@@ -103,26 +78,8 @@ export const settingsFormatter = (rawSettings, round) => {
 
         // по убыванию баллов жюри
         const finSorted = rawSettings.fins.toSorted((a, b) => rawSettings.sumJudges[b] - rawSettings.sumJudges[a]);
-        
-        // const parts = finSorted.map((fin) => ({
-        //     name: fin,
-        //     points: rawSettings.sumJudges[fin],
-        // }));
-        
-        // const queue = finSorted.toReversed().map((fin) => ({
-        //     name: fin,
-        //     points: rawSettings.audience[fin],
-        // }));
 
-        const parts = rawSettings.sumJudges;
-        // finSorted.forEach((fin) => {
-        //     parts[fin] = rawSettings.sumJudges[fin];
-        // });
-
-        // const queue = finSorted.toReversed().map((fin) => ({
-        //     [fin]: rawSettings.audience[fin],
-        // }));
-        
+        const parts = rawSettings.sumJudges;        
         
         const queue = finSorted.toReversed().map((fin) => ({
             name: fin,

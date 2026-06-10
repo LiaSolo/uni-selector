@@ -1,6 +1,5 @@
 import './styles.scss'
 import cn from 'classnames';
-import { useEffect, useRef, useState } from 'react';
 
 const pointClass = {
     1: 'one',
@@ -15,7 +14,7 @@ const pointClass = {
 
 export default function TableRow({
     id,
-    rowName, // legend ?
+    rowName,
     onChangeCell = val => console.log(val),
     rowData = {},
     isActive = true,
@@ -23,7 +22,6 @@ export default function TableRow({
     activeColumn,
     setActiveColumn,
 }) {
-    //console.log(rowName, isActive, rowData)
     return(
         <tr data-id={id}>
             <td className={cn('firstColumn', !isActive && 'disabled')}>
@@ -55,7 +53,3 @@ export default function TableRow({
         </tr>
     );
 }
-
-// добавить итог (сумма баллов за жюри) 
-// + инпут для зрительских
-// + итоговый итог
